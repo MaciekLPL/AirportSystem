@@ -13,7 +13,7 @@ int main() {
 			if (d < 0)
 				throw "typ: lancuch znakow";
 			else if (d == 0)
-				throw 22.2;
+				throw 22.244;
 			else
 				throw std::exception("wyjatek");
 		}
