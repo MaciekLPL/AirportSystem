@@ -5,6 +5,7 @@
 #include <list>
 
 class Connection;
+class Staff;
 
 class Airport {
 public:
@@ -13,10 +14,13 @@ public:
 	std::string airportName;
 	Airport(std::string code, std::string name, City* city);
 	void addConnection(Connection* connection);
+	void addStaff(Staff* pStaff);
 	void listConnections();
+	void listStaff();
 
 private:
 	std::list<Connection*> connectionList;
+	std::list<Staff*> staffList;
 };
 
 #endif
