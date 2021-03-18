@@ -7,12 +7,16 @@
 class ConsoleWindow {
 public:
 
-private:
+	ConsoleWindow();
+	ConsoleWindow(int _width = 120, int _height = 30);
 	void ShowConsoleCursor(int showFlag);
 	void gotoxy(int x, int y);
+	void drawFrame();
 
-	int xDimension = 120;
-	int yDimension = 30;
+private:
+
+	int width;
+	int height;
 
 };
 

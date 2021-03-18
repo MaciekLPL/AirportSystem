@@ -18,6 +18,7 @@ public:
 	void addStaff(Staff* pStaff);
 	void listConnections();
 	void listStaff();
+	Connection* searchForConnection(std::string code);
 
 private:
 	std::list<Connection*> connectionList;

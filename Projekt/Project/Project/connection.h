@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+class Airport;
+
 class Connection {
 public:
 	class Airport* pOrigin;
@@ -12,6 +14,8 @@ public:
 	Connection(Connection* connection);
 	~Connection() {};
 	Connection(Airport* destination, std::string code);
+	Connection(Airport* origin, Airport* destination, std::string code);
+	friend std::ostream& operator<<(std::ostream& os, Connection& c);
 
 private:
 

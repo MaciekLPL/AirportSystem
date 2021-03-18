@@ -12,8 +12,10 @@
 
 int main() {
 
-	View panelLeft(2, 1, 57, 22, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-	View panelRight(62, 1, 117, 22, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	ConsoleWindow mainWindow(120,30);
+
+	View panelLeft(2, 1, 57, 22, "Tytul panelu lewego");
+	View panelRight(62, 1, 117, 22, "Tytul panelu prawego");
 	View panelBottom(2, 24, 117, 28);
 
 	City m1("Miasto1");
@@ -49,12 +51,9 @@ int main() {
 	m2.addAirport(&l1);
 	m2.addAirport(&l2);
 
-
-
 	l1.addStaff(&s1);
 	l2.addStaff(&s2);
 	l3.addStaff(&s3);
-
 
 	m1.listAirports();
 	m2.listAirports();
@@ -69,6 +68,9 @@ int main() {
 	l3.listStaff();
 
 	std::cout << t1 << std::endl;
+
+	std::cout << (*l1.searchForConnection("Polaczenie 1-2"));
+	std::cout << (*l2.searchForConnection("Polaczenie 2-3"));
 
 	return 0;
 }

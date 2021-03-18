@@ -28,3 +28,12 @@ void Airport::listStaff() {
 	for (Staff* x : staffList)
 		std::cout << (*x).airport->airportName << " - " << (*x).name << " - " << (*x).age << std::endl;
 }
+
+Connection* Airport::searchForConnection(std::string code) {
+
+	auto result = std::find_if(connectionList.begin(), connectionList.end(), [&code](const Connection& connection)
+		{ return connection.connectionCode == code; });
+
+	return *result;
+
+}
