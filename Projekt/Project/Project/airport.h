@@ -9,6 +9,7 @@ class Staff;
 
 class Airport {
 public:
+
 	class City* pCity;
 	std::string airportCode;
 	std::string airportName;

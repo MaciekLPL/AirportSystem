@@ -6,6 +6,7 @@
 #include "airport.h"
 #include "connection.h"
 #include "staff.h"
+#include "ticket.h"
 
 
 
@@ -23,11 +24,19 @@ int main() {
 	Airport l3("LOTN3", "Lotnisko3", &m2);
 	Airport l4("LOTN4", "Lotnisko4", &m2);
 
-
 	Connection c1(&l2, "Polaczenie 1-2");
 	Connection c2(&l3, "Polaczenie 2-3");
 	Connection c3(&l4, "Polaczenie 3-4");
 	Connection c4(&l4, "Polaczenie 4-5");
+
+	l1.addConnection(&c1);
+	l2.addConnection(&c2);
+	l3.addConnection(&c3);
+	l4.addConnection(&c4);
+
+	Ticket t1(&c1, 2, 200);
+	Ticket t2(&c1, 3, 300);
+	Ticket t3(&c2, 2, 400);
 
 	Staff s1("Elon Elon", 69);
 	Staff s2("Elon Musk", 69);
@@ -40,10 +49,7 @@ int main() {
 	m2.addAirport(&l1);
 	m2.addAirport(&l2);
 
-	l1.addConnection(&c1);
-	l2.addConnection(&c2);
-	l3.addConnection(&c3);
-	l4.addConnection(&c4);
+
 
 	l1.addStaff(&s1);
 	l2.addStaff(&s2);
@@ -62,6 +68,7 @@ int main() {
 	l2.listStaff();
 	l3.listStaff();
 
+	std::cout << t1 << std::endl;
 
 	return 0;
 }

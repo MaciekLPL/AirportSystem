@@ -8,6 +8,9 @@ public:
 	class Airport* pOrigin;
 	class Airport* pDestination;
 	std::string connectionCode;
+	Connection();
+	Connection(Connection* connection);
+	~Connection() {};
 	Connection(Airport* destination, std::string code);
 
 private:

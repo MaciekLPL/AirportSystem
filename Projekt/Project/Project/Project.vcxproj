@@ -147,12 +147,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
     <ClCompile Include="staff.cpp" />
+    <ClCompile Include="ticket.cpp" />
     <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connection.h" />
     <ClInclude Include="consoleWindow.h" />
     <ClInclude Include="staff.h" />
+    <ClInclude Include="ticket.h" />
     <ClInclude Include="view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
