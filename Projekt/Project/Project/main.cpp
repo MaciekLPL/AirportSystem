@@ -18,18 +18,24 @@ int main() {
 	View panelRight(62, 1, 117, 22, "Tytul panelu prawego");
 	View panelBottom(2, 24, 117, 28);
 
+
+	std::list<City> cityList;
+
 	City m1("Miasto1");
 	City m2("Miasto2");
+
+	cityList.push_back(m1);
+	cityList.push_back(m2);
 
 	Airport l1("LOTN1", "Lotnisko1", &m1);
 	Airport l2("LOTN2", "Lotnisko2", &m1);
 	Airport l3("LOTN3", "Lotnisko3", &m2);
 	Airport l4("LOTN4", "Lotnisko4", &m2);
 
-	Connection c1(&l2, "Polaczenie 1-2");
-	Connection c2(&l3, "Polaczenie 2-3");
-	Connection c3(&l4, "Polaczenie 3-4");
-	Connection c4(&l4, "Polaczenie 4-5");
+	Connection c1(&l2, "POL1-2");
+	Connection c2(&l3, "POL2-3");
+	Connection c3(&l4, "POL3-4");
+	Connection c4(&l4, "POL4-5");
 
 	l1.addConnection(&c1);
 	l2.addConnection(&c2);
@@ -40,9 +46,9 @@ int main() {
 	Ticket t2(&c1, 3, 300);
 	Ticket t3(&c2, 2, 400);
 
-	Staff s1("Elon Elon", 69);
-	Staff s2("Elon Musk", 69);
-	Staff s3("Musk Musk", 69);
+	Staff s1("Imie Nazwisko1", 30);
+	Staff s2("Imie Nazwisko2", 12);
+	Staff s3("Imie Nazwisko3", 32);
 
 	m1.addAirport(&l1);
 	m1.addAirport(&l2);
@@ -54,6 +60,8 @@ int main() {
 	l1.addStaff(&s1);
 	l2.addStaff(&s2);
 	l3.addStaff(&s3);
+
+	std::cout << std::endl;
 
 	m1.listAirports();
 	m2.listAirports();
@@ -69,8 +77,8 @@ int main() {
 
 	std::cout << t1 << std::endl;
 
-	std::cout << (*l1.searchForConnection("Polaczenie 1-2"));
-	std::cout << (*l2.searchForConnection("Polaczenie 2-3"));
+	std::cout << (*l1.searchForConnection("POL1-2"));
+	std::cout << (*l2.searchForConnection("POL2-3"));
 
 	return 0;
 }

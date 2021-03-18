@@ -29,7 +29,7 @@ Connection::Connection(Airport* origin, Airport* destination, std::string code) 
 
 std::ostream& operator<<(std::ostream& os, Connection& c) {
 
-	os << "Polaczenie " << c.connectionCode << std::endl << " z: " << c.pOrigin->airportName << std::endl << " do: " << c.pDestination->airportName << std::endl;
+	os << "Polaczenie " << c.connectionCode << std::endl << "Z: " << c.pOrigin->airportName << std::endl << "Do: " << c.pDestination->airportName << std::endl;
 	return os;
 
 }

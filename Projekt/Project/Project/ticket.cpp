@@ -12,7 +12,7 @@ Ticket::Ticket(Connection* connection, int _numOfPassengers, int _price) {
 
 std::ostream& operator<<(std::ostream& os, Ticket& t) {
 
-	os << "Bilet na lot " << t.connectionCode << std::endl << " z: " << t.pOrigin->airportName << std::endl << " do: " << t.pDestination->airportName << std::endl;
+	os << "Bilet na lot " << t.connectionCode << std::endl << "Z: " << t.pOrigin->airportName << std::endl << "Do: " << t.pDestination->airportName << std::endl;
 	os << "Bilet dla " << t.numOfPassengers << " osob. Koszt: " << t.price << "." << std::endl;
 
 	return os;

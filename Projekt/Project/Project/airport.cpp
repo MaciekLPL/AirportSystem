@@ -35,5 +35,4 @@ Connection* Airport::searchForConnection(std::string code) {
 		{ return connection.connectionCode == code; });
 
 	return *result;
-
 }
