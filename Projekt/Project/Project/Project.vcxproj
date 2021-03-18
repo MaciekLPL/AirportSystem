@@ -143,13 +143,17 @@
     <ClCompile Include="city.cpp" />
     <ClCompile Include="city.h" />
     <ClCompile Include="connection.cpp" />
+    <ClCompile Include="consoleWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
     <ClCompile Include="staff.cpp" />
+    <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connection.h" />
+    <ClInclude Include="consoleWindow.h" />
     <ClInclude Include="staff.h" />
+    <ClInclude Include="view.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

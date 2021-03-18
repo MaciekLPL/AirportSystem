@@ -36,12 +36,24 @@
     <ClCompile Include="staff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="view.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="consoleWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="staff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="view.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="consoleWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

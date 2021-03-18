@@ -1,12 +1,19 @@
 #include <iostream>
 #include <list>
+#include "view.h"
+#include "consoleWindow.h"
 #include "city.h"
 #include "airport.h"
 #include "connection.h"
 #include "staff.h"
 
 
+
 int main() {
+
+	View panelLeft(2, 1, 57, 22, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	View panelRight(62, 1, 117, 22, "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+	View panelBottom(2, 24, 117, 28);
 
 	City m1("Miasto1");
 	City m2("Miasto2");

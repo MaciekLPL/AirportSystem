@@ -108,10 +108,10 @@ int main() {
 	Patient p3("Ula", fever);
 	Patient p4("Bartosz", bleeding);
 
-	q.push(p2);
 	q.push(p1);
-	q.push(p4);
+	q.push(p2);
 	q.push(p3);
+	q.push(p4);
 
 	while (!q.empty()) {
 		std::cout << q.top();
