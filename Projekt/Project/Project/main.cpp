@@ -93,8 +93,22 @@ int main() {
 	std::cout << (*l1.searchForConnection("POL1-2"));
 	std::cout << (*l2.searchForConnection("POL2-3"));*/
 
-	while (_getch()) {
-		panelLeft.clearPanelContent();
+
+	mainWindow.ShowConsoleCursor(0);
+	while (1) {
+
+		int c = _getch();
+		if (c == 0xE0) {
+			//arrowsHandling();
+		}
+
+		else {
+			if (c == 27) //escape
+				break;
+			else if (c == 9)
+				panelLeft.clearPanelContent();
+		}
+
 	}
 	return 0;
 }
