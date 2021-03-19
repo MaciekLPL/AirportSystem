@@ -3,10 +3,9 @@
 #include "airport.h"
 
 
-Airport::Airport(std::string code, std::string name, City* city) {
+Airport::Airport(std::string code, std::string name) {
 	this->airportCode = code;
 	this->airportName = name;
-	this->pCity = city;
 }
 
 void Airport::addConnection(Connection* pConnection) {

@@ -1,4 +1,6 @@
-#include "view.h";
+#include "view.h"
+#include "city.h"
+#include "airport.h"
 
 
 View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTitle) {
@@ -59,7 +61,26 @@ void View::printTitle() {
 	for (int i = startX + 1; i < endX; i++)
 		putc(196, stdout);
 	putc(180, stdout);
+}
 
+void View::updateTitle(std::string newTitle) {
+
+	gotoxy(startX + 1, startY + 1);
+	for (int i = startX; i < endX - 1; i++)		//usuwanie obecnego
+		putc(' ', stdout);
+	
+	this->panelTitle = newTitle;
+	printTitle();
+}
+
+void View::clearPanelContent() {
+	gotoxy(startX + 1, startY + 3);
+	for (int i = startY + 3; i < endY; i++) {
+		for (int j = startX + 1; j < endX; j++) {
+			putc(' ', stdout);
+		}
+		gotoxy(startX + 1, i + 1);
+	}
 }
 
 void View::gotoxy(int x, int y) {
@@ -67,4 +88,35 @@ void View::gotoxy(int x, int y) {
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+void View::printCities(std::list <City*> cities) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "City" << std::setw(15) << "Postal code" << std::endl;
+	i++;
+
+	for (City* city : cities) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*city).cityName;
+		std::cout << std::setw(15) << std::left << (*city).postalCode;
+	}
+	updateTitle("Cities");
+}
+
+void View::printAirports(std::list <Airport*> airports) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "Airport name" << std::setw(15) << "Airport code" << std::setw(15) << "City" << std::endl;
+	i++;
+
+	for (Airport* airport : airports) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*airport).airportName;
+		std::cout << std::setw(15) << std::left << (*airport).airportCode;
+		std::cout << std::setw(15) << std::left << (*airport).pCity->cityName;
+	}
+	updateTitle("Airports");
 }

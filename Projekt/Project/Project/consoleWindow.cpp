@@ -1,4 +1,6 @@
 #include "consoleWindow.h"
+#include "view.h"
+
 
 
 ConsoleWindow::ConsoleWindow() {};
@@ -49,4 +51,10 @@ void ConsoleWindow::drawFrame() {
 	gotoxy(width-1, height-1);
 	putc(217, stdout);
 	gotoxy(0, height-1);
+}
+
+void ConsoleWindow::addView(View* _view) {
+	
+	listOfViews.push_back(_view);
+
 }

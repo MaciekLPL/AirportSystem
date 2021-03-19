@@ -1,12 +1,14 @@
 #include <iostream>
 #include <list>
-#include "view.h"
-#include "consoleWindow.h"
+#include <conio.h>
 #include "city.h"
+#include "consoleWindow.h"
 #include "airport.h"
 #include "connection.h"
 #include "staff.h"
+#include "airplane.h"
 #include "ticket.h"
+#include "view.h"
 
 
 
@@ -18,19 +20,28 @@ int main() {
 	View panelRight(62, 1, 117, 22, "Tytul panelu prawego");
 	View panelBottom(2, 24, 117, 28);
 
+	mainWindow.addView(&panelLeft);
+	mainWindow.addView(&panelRight);
+	mainWindow.addView(&panelBottom);
 
-	std::list<City> cityList;
+	City m1("Miasto1", "44-303");
+	City m2("Miasto2", "44-333");
+	City m3("Miasto2", "34-333");
 
-	City m1("Miasto1");
-	City m2("Miasto2");
+	std::list<City*> cityList;
 
-	cityList.push_back(m1);
-	cityList.push_back(m2);
 
-	Airport l1("LOTN1", "Lotnisko1", &m1);
-	Airport l2("LOTN2", "Lotnisko2", &m1);
-	Airport l3("LOTN3", "Lotnisko3", &m2);
-	Airport l4("LOTN4", "Lotnisko4", &m2);
+	cityList.push_back(&m1);
+	cityList.push_back(&m2);
+	cityList.push_back(&m3);
+
+	panelLeft.printCities(cityList);
+	
+	Airport l1("LOTN1", "Lotnisko1");
+	Airport l2("LOTN2", "Lotnisko2");
+	Airport l3("LOTN3", "Lotnisko3");
+	Airport l4("LOTN4", "Lotnisko4");
+
 
 	Connection c1(&l2, "POL1-2");
 	Connection c2(&l3, "POL2-3");
@@ -57,11 +68,13 @@ int main() {
 	m2.addAirport(&l1);
 	m2.addAirport(&l2);
 
+	panelRight.printAirports(m2.airportList);
+
 	l1.addStaff(&s1);
 	l2.addStaff(&s2);
 	l3.addStaff(&s3);
 
-	std::cout << std::endl;
+	/*std::cout << std::endl;
 
 	m1.listAirports();
 	m2.listAirports();
@@ -78,7 +91,10 @@ int main() {
 	std::cout << t1 << std::endl;
 
 	std::cout << (*l1.searchForConnection("POL1-2"));
-	std::cout << (*l2.searchForConnection("POL2-3"));
+	std::cout << (*l2.searchForConnection("POL2-3"));*/
 
+	while (_getch()) {
+		panelLeft.clearPanelContent();
+	}
 	return 0;
 }

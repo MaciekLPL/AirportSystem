@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="airplane.cpp" />
     <ClCompile Include="airport.cpp" />
     <ClCompile Include="city.cpp" />
     <ClCompile Include="city.h" />
@@ -151,6 +152,7 @@
     <ClCompile Include="view.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="airplane.h" />
     <ClInclude Include="connection.h" />
     <ClInclude Include="consoleWindow.h" />
     <ClInclude Include="staff.h" />

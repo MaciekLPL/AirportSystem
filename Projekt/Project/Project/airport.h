@@ -13,7 +13,7 @@ public:
 	class City* pCity;
 	std::string airportCode;
 	std::string airportName;
-	Airport(std::string code, std::string name, City* city);
+	Airport(std::string code, std::string name);
 	void addConnection(Connection* connection);
 	void addStaff(Staff* pStaff);
 	void listConnections();

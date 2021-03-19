@@ -2,7 +2,10 @@
 #define CONSOLEWINDOW_H
 
 #include <iostream>
+#include <list>
 #include <Windows.h>
+
+class View;
 
 class ConsoleWindow {
 public:
@@ -12,9 +15,11 @@ public:
 	void ShowConsoleCursor(int showFlag);
 	void gotoxy(int x, int y);
 	void drawFrame();
+	void addView(View* _view);
 
 private:
 
+	std::list<View*> listOfViews;
 	int width;
 	int height;
 
