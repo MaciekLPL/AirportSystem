@@ -16,8 +16,8 @@ int main() {
 
 	ConsoleWindow mainWindow(120,30);
 
-	View panelLeft(2, 1, 57, 22, "Tytul panelu lewego");
-	View panelRight(62, 1, 117, 22, "Tytul panelu prawego");
+	View panelLeft(2, 1, 57, 22, " ");
+	View panelRight(62, 1, 117, 22, " ");
 	View panelBottom(2, 24, 117, 28);
 
 	mainWindow.addView(&panelLeft);
@@ -30,12 +30,9 @@ int main() {
 
 	std::list<City*> cityList;
 
-
 	cityList.push_back(&m1);
 	cityList.push_back(&m2);
 	cityList.push_back(&m3);
-
-	panelLeft.printCities(cityList);
 	
 	Airport l1("LOTN1", "Lotnisko1");
 	Airport l2("LOTN2", "Lotnisko2");
@@ -68,14 +65,11 @@ int main() {
 	m2.addAirport(&l1);
 	m2.addAirport(&l2);
 
-	panelRight.printAirports(m2.airportList);
-
 	l1.addStaff(&s1);
 	l2.addStaff(&s2);
 	l3.addStaff(&s3);
 
 	/*std::cout << std::endl;
-
 	m1.listAirports();
 	m2.listAirports();
 
@@ -95,20 +89,35 @@ int main() {
 
 
 	mainWindow.ShowConsoleCursor(0);
+
 	while (1) {
 
 		int c = _getch();
 		if (c == 0xE0) {
-			//arrowsHandling();
-		}
-
-		else {
-			if (c == 27) //escape
-				break;
-			else if (c == 9)
+			c = _getch();
+			switch (c) {
+			case 0x4B:		//lewo
 				panelLeft.clearPanelContent();
+				break;
+			case 0x4D:		//prawo
+				panelRight.clearPanelContent();
+				break;
+			case 0x48:		//góra
+				panelLeft.printCities(cityList);
+				break;
+			case 0x50:		//dó³
+				panelRight.printAirports(m1.airportList);
+				break;
+			default:
+				break;
+			}
 		}
-
+		else {
+			if (c == 27)		//escape
+				break;
+			else if (c == 9)	//tab
+				break;
+		}
 	}
 	return 0;
 }

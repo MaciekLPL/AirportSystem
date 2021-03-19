@@ -20,6 +20,3 @@ void City::listAirports() {
 	for (Airport* n : airportList)
 		std::cout << (*n).airportCode << " - " << (*n).airportName << " - " << (*n).pCity->cityName << std::endl;
 }
-
-
-
