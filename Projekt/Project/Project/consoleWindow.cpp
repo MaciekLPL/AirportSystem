@@ -3,14 +3,13 @@
 
 
 
-ConsoleWindow::ConsoleWindow() {};
 
 ConsoleWindow::ConsoleWindow(int _width, int _height) {
 
 	this->width = _width;
 	this->height = _height;
 	drawFrame();
-
+	currentView = 1;
 }
 
 void ConsoleWindow::ShowConsoleCursor(int showFlag) {

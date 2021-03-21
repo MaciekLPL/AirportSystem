@@ -5,9 +5,11 @@
 Ticket::Ticket(Connection* connection, int _numOfPassengers, int _price) {
 	this->pOrigin = connection->pOrigin;
 	this->pDestination = connection->pDestination;
+	this->connectionCode = connection->connectionCode;
+	
 	this->numOfPassengers = _numOfPassengers;
 	this->price = _price;
-
+	connection->ticketList.push_back(this);	
 }
 
 std::ostream& operator<<(std::ostream& os, Ticket& t) {

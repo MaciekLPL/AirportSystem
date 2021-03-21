@@ -7,8 +7,8 @@ class Airplane {
 public:
 	class Airport* airport;
 	std::string registration;
-	std::string airplaneType;
-	Airplane(std::string _registration, std::string _arplaneType);
+	std::string type;
+	Airplane(std::string _registration, std::string _type);
 
 private:
 

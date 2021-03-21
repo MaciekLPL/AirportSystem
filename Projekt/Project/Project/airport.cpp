@@ -1,5 +1,6 @@
 #include "connection.h"
 #include "staff.h"
+#include "airplane.h"
 #include "airport.h"
 
 
@@ -16,6 +17,11 @@ void Airport::addConnection(Connection* pConnection) {
 void Airport::addStaff(Staff* pStaff) {
 	this->staffList.push_back(pStaff);
 	pStaff->airport = this;
+}
+
+void Airport::addAirplane(Airplane* pAirplane) {
+	this->airplaneList.push_back(pAirplane);
+	pAirplane->airport = this;
 }
 
 void Airport::listConnections() {

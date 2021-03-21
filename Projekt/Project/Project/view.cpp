@@ -1,5 +1,9 @@
 #include "view.h"
 #include "city.h"
+#include "connection.h"
+#include "staff.h"
+#include "airplane.h"
+#include "ticket.h"
 #include "airport.h"
 
 
@@ -121,4 +125,73 @@ void View::printAirports(std::list <Airport*> airports) {
 		std::cout << std::setw(15) << std::left << (*airport).pCity->cityName;
 	}
 	updateTitle("Airports");
+}
+
+void View::printConnections(std::list <Connection*> connections) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "Departure" << std::setw(10) << "Code" << std::setw(15) << "Arrival" << std::setw(10) << "Code" << std::setw(15) << "Connection" << std::endl;
+	i++;
+
+	for (Connection* connection : connections) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*connection).pOrigin->airportName;
+		std::cout << std::setw(10) << std::left << (*connection).pOrigin->airportCode;
+		std::cout << std::setw(15) << std::left << (*connection).pDestination->airportName;
+		std::cout << std::setw(10) << std::left << (*connection).pDestination->airportCode;
+		std::cout << std::setw(15) << std::left << (*connection).connectionCode;
+	}
+	updateTitle("Connections");
+}
+
+
+void View::printStaff(std::list <Staff*> staffList) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "Airport" << std::setw(20) << "Name" << std::setw(10) << "Age" << std::endl;
+	i++;
+
+	for (Staff* staff : staffList) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*staff).airport->airportName;
+		std::cout << std::setw(20) << std::left << (*staff).name;
+		std::cout << std::setw(10) << std::left << (*staff).age;
+	}
+	updateTitle("Staff");
+}
+
+
+void View::printAirplanes(std::list <Airplane*> airplanes) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "Airport" << std::setw(15) << "Registration" << std::setw(15) << "Type" << std::endl;
+	i++;
+
+	for (Airplane* airplane : airplanes) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*airplane).airport->airportName;
+		std::cout << std::setw(15) << std::left << (*airplane).registration;
+		std::cout << std::setw(15) << std::left << (*airplane).type;
+	}
+	updateTitle("Airplanes");
+}
+
+
+void View::printTickets(std::list <Ticket*> tickets) {
+
+	int i = this->startY + 3;
+	gotoxy(this->startX + 2, i++);
+	std::cout << std::left << std::setw(15) << "Connection" << std::setw(15) << "Passengers" << std::setw(15) << "Price" << std::endl;
+	i++;
+
+	for (Ticket* ticket : tickets) {
+		gotoxy(this->startX + 2, i++);
+		std::cout << std::setw(15) << std::left << (*ticket).connectionCode;
+		std::cout << std::setw(15) << std::left << (*ticket).numOfPassengers;
+		std::cout << std::setw(15) << std::left << (*ticket).price;
+	}
+	updateTitle("Tickets");
 }

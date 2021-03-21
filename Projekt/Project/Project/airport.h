@@ -6,6 +6,7 @@
 
 class Connection;
 class Staff;
+class Airplane;
 
 class Airport {
 public:
@@ -17,14 +18,16 @@ public:
 	Airport(std::string code, std::string name);
 	void addConnection(Connection* connection);
 	void addStaff(Staff* pStaff);
+	void addAirplane(Airplane* pAirplane);
 	void listConnections();
 	void listStaff();
 	Connection* searchForConnection(std::string code);
 
-private:
 	std::list<Connection*> connectionList;
 	std::list<Staff*> staffList;
+	std::list<Airplane*> airplaneList;
+
+private:
 };
 
 #endif
-
