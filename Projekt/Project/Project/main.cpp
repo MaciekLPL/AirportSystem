@@ -8,32 +8,71 @@
 #include "airplane.h"
 #include "ticket.h"
 #include "view.h"
+#include "content.h"
 
 
 
 int main() {
 
 	View panelMain(22, 1, 97, 22, " ");
-	//View panelRight(62, 1, 117, 22, " ");
-	//View panelBottom(22, 24, 97, 28);
+	View panelBottom(22, 24, 97, 28);
 
+	
 
-	City m1("Miasto1", "44-303");
-	City m2("Miasto2", "44-333");
-	City m3("Miasto2", "34-333");
+	std::list<City*> mainCityList;
+	std::list<Airport*> mainAirportList;
+	std::list<Airplane*> mainAirplaneList;
+	std::list<Ticket*> mainTicketsList;
+	std::list<Connection*> mainConnList;
+	std::list<Staff*> mainStaffList;
+	Content mainContent(&panelMain, &mainCityList, &mainAirportList, &mainAirplaneList, &mainStaffList, &mainConnList, &mainTicketsList);
 
-	std::list<City*> cityList;
+	City m1("Miasto1", "44-1");
+	City m2("Miasto2", "44-2");
+	City m4("Miasto2", "34-3");
+	City m5("Miasto2", "34-4");
+	City m6("Miasto2", "34-5");
+	City m7("Miasto2", "34-6");
+	City m8("Miasto2", "34-7");
+	City m9("Miasto2", "34-8");
+	City m10("Miasto2", "34-9");
+	City m11("Miasto2", "34-10");
+	City m12("Miasto2", "34-11");
+	City m13("Miasto2", "34-12");
+	City m14("Miasto2", "34-13");
+	City m15("Miasto2", "34-14");
+	City m16("Miasto2", "34-15");
+	City m17("Miasto2", "34-16");
+	City m18("Miasto2", "34-17");
+	City m19("Miasto2", "34-18");
+	City m20("Miasto2", "34-19");
 
-	cityList.push_back(&m1);
-	cityList.push_back(&m2);
-	cityList.push_back(&m3);
+	mainCityList.push_back(&m1);
+	mainCityList.push_back(&m2);
+	mainCityList.push_back(&m4);
+	mainCityList.push_back(&m5);
+	mainCityList.push_back(&m6);
+	mainCityList.push_back(&m7);
+	mainCityList.push_back(&m8);
+	mainCityList.push_back(&m9);
+	mainCityList.push_back(&m10);
+	mainCityList.push_back(&m11);
+	mainCityList.push_back(&m12);
+	mainCityList.push_back(&m13);
+	mainCityList.push_back(&m14);
+	mainCityList.push_back(&m15);
+	mainCityList.push_back(&m16);
+	mainCityList.push_back(&m17);
+	mainCityList.push_back(&m18);
+	mainCityList.push_back(&m19);
+	mainCityList.push_back(&m20);
+
 	
 	Airport l1("LNO1", "Lotnisko1");
 	Airport l2("LNO2", "Lotnisko2");
 	Airport l3("LNO3", "Lotnisko3");
 	Airport l4("LNO4", "Lotnisko4");
 
-	std::list<Airport*> mainAirportList;
 	mainAirportList.push_back(&l1);
 	mainAirportList.push_back(&l2);
 	mainAirportList.push_back(&l3);
@@ -44,7 +83,7 @@ int main() {
 	Connection c3(&l4, "POL3-4");
 	Connection c4(&l4, "POL4-5");
 
-	std::list<Connection*> mainConnList;
+	
 	mainConnList.push_back(&c1);
 	mainConnList.push_back(&c2);
 	mainConnList.push_back(&c3);
@@ -58,8 +97,7 @@ int main() {
 	Ticket t1(&c1, 2, 200);
 	Ticket t2(&c1, 3, 300);
 	Ticket t3(&c1, 2, 400);
-
-	std::list<Ticket*> mainTicketsList;
+	
 	mainTicketsList.push_back(&t1);
 	mainTicketsList.push_back(&t2);
 	mainTicketsList.push_back(&t3);
@@ -68,7 +106,6 @@ int main() {
 	Staff s2("Imie Nazwisko2", 12);
 	Staff s3("Imie Nazwisko3", 32);
 
-	std::list<Staff*> mainStaffList;
 	mainStaffList.push_back(&s1);
 	mainStaffList.push_back(&s2);
 	mainStaffList.push_back(&s3);
@@ -78,7 +115,6 @@ int main() {
 	Airplane a3("SP-DLA", "B747");
 	Airplane a4("SP-SPA", "B777");
 
-	std::list<Airplane*> mainAirplaneList;
 	mainAirplaneList.push_back(&a1);
 	mainAirplaneList.push_back(&a2);
 	mainAirplaneList.push_back(&a3);
@@ -118,9 +154,10 @@ int main() {
 
 	std::cout << (*l1.searchForConnection("POL1-2"));
 	std::cout << (*l2.searchForConnection("POL2-3"));*/
-	panelMain.printCities(cityList);
+	
+	mainContent.printCities();
 	panelMain.ShowConsoleCursor(0);
-
+	int skip = 0;
 	while (1) {
 
 		int c = _getch();
@@ -134,10 +171,40 @@ int main() {
 				//panelRight.clearPanelContent();
 				break;
 			case 0x48:		//góra
-				//panelMain.printAirplanes(l1.airplaneList);
+				if (skip != 0) {
+					skip--;
+					if (panelMain.currentView == 1)
+						mainContent.printCities(skip);
+					else if (panelMain.currentView == 2)
+						mainContent.printAirports();
+					else if (panelMain.currentView == 3)
+						mainContent.printConnections();
+					else if (panelMain.currentView == 4)
+						mainContent.printStaff();
+					else if (panelMain.currentView == 5)
+						mainContent.printAirplanes();
+					else if (panelMain.currentView == 6)
+						mainContent.printTickets();
+				}
 				break;
 			case 0x50:		//dó³
-				//panelRight.printAirports(m1.airportList);
+				if (panelMain.currentView == 1) {
+					if (mainContent.cityList->size() + skip > 16 && skip < mainContent.cityList->size() - 16) {
+						skip++;
+						mainContent.printCities(skip);
+					}
+				}
+				else if (panelMain.currentView == 2)
+					mainContent.printAirports();
+				else if (panelMain.currentView == 3)
+					mainContent.printConnections();
+				else if (panelMain.currentView == 4)
+					mainContent.printStaff();
+				else if (panelMain.currentView == 5)
+					mainContent.printAirplanes();
+				else if (panelMain.currentView == 6)
+					mainContent.printTickets();
+
 				break;
 			default:
 				break;
@@ -147,20 +214,20 @@ int main() {
 			if (c == 9)	{
 				//tab
 				panelMain.clearPanelContent();
-
+				skip = 0;
 				panelMain.currentView++;
 				if (panelMain.currentView == 1)
-					panelMain.printCities(cityList);
+					mainContent.printCities();
 				else if (panelMain.currentView == 2)
-					panelMain.printAirports(mainAirportList);
+					mainContent.printAirports();
 				else if (panelMain.currentView == 3)
-					panelMain.printConnections(mainConnList);
+					mainContent.printConnections();
 				else if (panelMain.currentView == 4)
-					panelMain.printStaff(mainStaffList);
+					mainContent.printStaff();
 				else if (panelMain.currentView == 5)
-					panelMain.printAirplanes(mainAirplaneList);
+					mainContent.printAirplanes();
 				else if (panelMain.currentView == 6){
-					panelMain.printTickets(mainTicketsList);
+					mainContent.printTickets();
 					panelMain.currentView = 0;
 				}
 			}

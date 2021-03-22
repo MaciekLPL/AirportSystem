@@ -26,20 +26,15 @@ public:
 	void clearPanelContent();
 	void gotoxy(int x, int y);
 
-	void printCities(std::list <City*> cities);
-	void printAirports(std::list <Airport*> airports);
-	void printConnections(std::list <Connection*> connections);
-	void printStaff(std::list <Staff*> staff);
-	void printAirplanes(std::list <Airplane*> airplanes);
-	void printTickets(std::list <Ticket*> tickets);
 	int currentView = 1;
-
-private:
 	int startX;
 	int startY;
 	int endX;
 	int endY;
 	std::string panelTitle;
+
+private:
+
 };
 
 #endif

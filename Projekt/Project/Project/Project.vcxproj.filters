@@ -45,6 +45,12 @@
     <ClCompile Include="airplane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="content.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="content.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connection.h">

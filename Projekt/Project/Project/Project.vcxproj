@@ -144,6 +144,8 @@
     <ClCompile Include="city.cpp" />
     <ClCompile Include="city.h" />
     <ClCompile Include="connection.cpp" />
+    <ClCompile Include="content.cpp" />
+    <ClCompile Include="content.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
     <ClCompile Include="staff.cpp" />
