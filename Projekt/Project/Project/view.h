@@ -19,6 +19,8 @@ public:
 	View(int startX, int startY, int endX, int endY);
 	View(int startX, int startY, int endX, int endY, std::string _panelTitle);
 	void drawView();
+	void drawFrame();
+	void ShowConsoleCursor(int showFlag);
 	void printTitle();
 	void updateTitle(std::string newTitle);
 	void clearPanelContent();
@@ -30,6 +32,7 @@ public:
 	void printStaff(std::list <Staff*> staff);
 	void printAirplanes(std::list <Airplane*> airplanes);
 	void printTickets(std::list <Ticket*> tickets);
+	int currentView = 1;
 
 private:
 	int startX;

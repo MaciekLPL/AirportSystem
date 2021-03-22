@@ -144,7 +144,6 @@
     <ClCompile Include="city.cpp" />
     <ClCompile Include="city.h" />
     <ClCompile Include="connection.cpp" />
-    <ClCompile Include="consoleWindow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
     <ClCompile Include="staff.cpp" />
@@ -154,7 +153,6 @@
   <ItemGroup>
     <ClInclude Include="airplane.h" />
     <ClInclude Include="connection.h" />
-    <ClInclude Include="consoleWindow.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="ticket.h" />
     <ClInclude Include="view.h" />

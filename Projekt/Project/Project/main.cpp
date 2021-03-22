@@ -2,7 +2,6 @@
 #include <list>
 #include <conio.h>
 #include "city.h"
-#include "consoleWindow.h"
 #include "airport.h"
 #include "connection.h"
 #include "staff.h"
@@ -14,15 +13,10 @@
 
 int main() {
 
-	ConsoleWindow mainWindow(120,30);
-
 	View panelMain(22, 1, 97, 22, " ");
 	//View panelRight(62, 1, 117, 22, " ");
-	View panelBottom(22, 24, 97, 28);
+	//View panelBottom(22, 24, 97, 28);
 
-	mainWindow.addView(&panelMain);
-	//mainWindow.addView(&panelRight);
-	mainWindow.addView(&panelBottom);
 
 	City m1("Miasto1", "44-303");
 	City m2("Miasto2", "44-333");
@@ -125,7 +119,7 @@ int main() {
 	std::cout << (*l1.searchForConnection("POL1-2"));
 	std::cout << (*l2.searchForConnection("POL2-3"));*/
 	panelMain.printCities(cityList);
-	mainWindow.ShowConsoleCursor(0);
+	panelMain.ShowConsoleCursor(0);
 
 	while (1) {
 
@@ -154,20 +148,20 @@ int main() {
 				//tab
 				panelMain.clearPanelContent();
 
-				mainWindow.currentView++;
-				if (mainWindow.currentView == 1)
+				panelMain.currentView++;
+				if (panelMain.currentView == 1)
 					panelMain.printCities(cityList);
-				else if (mainWindow.currentView == 2)
+				else if (panelMain.currentView == 2)
 					panelMain.printAirports(mainAirportList);
-				else if (mainWindow.currentView == 3)
+				else if (panelMain.currentView == 3)
 					panelMain.printConnections(mainConnList);
-				else if (mainWindow.currentView == 4)
+				else if (panelMain.currentView == 4)
 					panelMain.printStaff(mainStaffList);
-				else if (mainWindow.currentView == 5)
+				else if (panelMain.currentView == 5)
 					panelMain.printAirplanes(mainAirplaneList);
-				else if (mainWindow.currentView == 6){
+				else if (panelMain.currentView == 6){
 					panelMain.printTickets(mainTicketsList);
-					mainWindow.currentView = 0;
+					panelMain.currentView = 0;
 				}
 			}
 			else if (c == 27)	//esc

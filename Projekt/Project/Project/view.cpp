@@ -15,7 +15,9 @@ View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTit
 	this->endY = _endY;
 	this->panelTitle = _panelTitle;
 
+	drawFrame();
 	drawView();
+	
 	if (!panelTitle.empty())
 		printTitle();
 
@@ -28,6 +30,7 @@ View::View(int _startX, int _startY, int _endX, int _endY) {
 	this->endX = _endX;
 	this->endY = _endY;
 
+	drawFrame();
 	drawView();
 }
 
@@ -54,6 +57,35 @@ void View::drawView() {
 	gotoxy(endX, endY);
 	putc(217, stdout);
 	gotoxy(0, endY + 1);
+}
+
+void View::drawFrame() {
+	int height = 30;
+	int width = 120;
+
+	gotoxy(0, 0);
+
+	for (int h = 0; h < height; h++) {
+		for (int w = 0; w < width; w++) {
+
+			if (w == 0 || w == width - 1)
+				putc(179, stdout);
+			else if (h == 0 || h == height - 1)
+				putc(196, stdout);
+			else
+				putc(' ', stdout);
+		}
+	}
+	gotoxy(0, 0);
+	putc(218, stdout);
+	gotoxy(width - 1, 0);
+	putc(191, stdout);
+	gotoxy(0, height - 1);
+	putc(192, stdout);
+	gotoxy(width - 1, height - 1);
+	putc(217, stdout);
+	gotoxy(0, height - 1);
+
 }
 
 void View::printTitle() {
@@ -194,4 +226,12 @@ void View::printTickets(std::list <Ticket*> tickets) {
 		std::cout << std::setw(15) << std::left << (*ticket).price;
 	}
 	updateTitle("Tickets");
+}
+
+void View::ShowConsoleCursor(int showFlag) {
+
+	CONSOLE_CURSOR_INFO cursorInfo;
+	cursorInfo.bVisible = showFlag;
+	cursorInfo.dwSize = 100;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
 }
