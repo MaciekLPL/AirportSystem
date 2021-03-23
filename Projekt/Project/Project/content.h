@@ -24,11 +24,11 @@ public:
 		std::list <Staff*>* staffL, std::list <Connection*>* connL,
 		std::list <Ticket*>* ticketL);
 	void printCities(int skip = 0);
-	void printAirports();
-	void printConnections();
-	void printStaff();
-	void printAirplanes();
-	void printTickets();
+	void printAirports(int skip = 0);
+	void printConnections(int skip = 0);
+	void printStaff(int skip = 0);
+	void printAirplanes(int skip = 0);
+	void printTickets(int skip = 0);
 
 	std::list <City*>* cityList;
 	std::list <Airport*>* airportList;

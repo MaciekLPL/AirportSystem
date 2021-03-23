@@ -32,7 +32,6 @@ Content::Content(View* _parentView, std::list <City*>* cityL,
 void Content::printCities(int skip) {
 
 
-
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "City" << std::setw(15) << "Postal code" << std::endl;
@@ -42,7 +41,7 @@ void Content::printCities(int skip) {
 	std::advance(iter, skip);
 
 	for (auto x = iter; x != (*cityList).end(); ++x) {
-		if (i == 22) 
+		if (i >= 22) 
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
 		std::cout << std::setw(15) << std::left << (*x)->cityName;
@@ -51,12 +50,15 @@ void Content::printCities(int skip) {
 	parentView->updateTitle("Cities");
 }
 
-void Content::printAirports() {
+void Content::printAirports(int skip) {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Airport name" << std::setw(15) << "Airport code" << std::setw(15) << "City" << std::endl;
 	i++;
+
+	auto iter = (*cityList).begin();
+	std::advance(iter, skip);
 
 	for (Airport* airport : *airportList) {
 		parentView->gotoxy(parentView->startX + 2, i++);
@@ -67,7 +69,7 @@ void Content::printAirports() {
 	parentView->updateTitle("Airports");
 }
 
-void Content::printConnections() {
+void Content::printConnections(int skip) {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
@@ -86,7 +88,7 @@ void Content::printConnections() {
 }
 
 
-void Content::printStaff() {
+void Content::printStaff(int skip) {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
@@ -103,7 +105,7 @@ void Content::printStaff() {
 }
 
 
-void Content::printAirplanes() {
+void Content::printAirplanes(int skip) {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
@@ -120,7 +122,7 @@ void Content::printAirplanes() {
 }
 
 
-void Content::printTickets() {
+void Content::printTickets(int skip) {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);

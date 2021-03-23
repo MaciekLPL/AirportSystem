@@ -155,9 +155,9 @@ int main() {
 	std::cout << (*l1.searchForConnection("POL1-2"));
 	std::cout << (*l2.searchForConnection("POL2-3"));*/
 	
+	int skip = 0;
 	mainContent.printCities();
 	panelMain.ShowConsoleCursor(0);
-	int skip = 0;
 	while (1) {
 
 		int c = _getch();
@@ -176,15 +176,15 @@ int main() {
 					if (panelMain.currentView == 1)
 						mainContent.printCities(skip);
 					else if (panelMain.currentView == 2)
-						mainContent.printAirports();
+						mainContent.printAirports(skip);
 					else if (panelMain.currentView == 3)
-						mainContent.printConnections();
+						mainContent.printConnections(skip);
 					else if (panelMain.currentView == 4)
-						mainContent.printStaff();
+						mainContent.printStaff(skip);
 					else if (panelMain.currentView == 5)
-						mainContent.printAirplanes();
+						mainContent.printAirplanes(skip);
 					else if (panelMain.currentView == 6)
-						mainContent.printTickets();
+						mainContent.printTickets(skip);
 				}
 				break;
 			case 0x50:		//dó³
@@ -193,21 +193,40 @@ int main() {
 						skip++;
 						mainContent.printCities(skip);
 					}
-				}
-				else if (panelMain.currentView == 2)
-					mainContent.printAirports();
-				else if (panelMain.currentView == 3)
-					mainContent.printConnections();
-				else if (panelMain.currentView == 4)
-					mainContent.printStaff();
-				else if (panelMain.currentView == 5)
-					mainContent.printAirplanes();
-				else if (panelMain.currentView == 6)
-					mainContent.printTickets();
-
-				break;
+					else if (panelMain.currentView == 2) {
+						if (mainContent.airportList->size() + skip > 16 && skip < mainContent.airportList->size() - 16) {
+							skip++;
+							mainContent.printAirports(skip);
+						}
+					}
+					else if (panelMain.currentView == 3) {
+						if (mainContent.connectionList->size() + skip > 16 && skip < mainContent.connectionList->size() - 16) {
+							skip++;
+							mainContent.printConnections(skip);
+						}
+					}
+					else if (panelMain.currentView == 4) {
+						if (mainContent.staffList->size() + skip > 16 && skip < mainContent.staffList->size() - 16) {
+							skip++;
+							mainContent.printStaff(skip);
+						}
+					}
+					else if (panelMain.currentView == 5) {
+						if (mainContent.airplaneList->size() + skip > 16 && skip < mainContent.airplaneList->size() - 16) {
+							skip++;
+							mainContent.printAirplanes(skip);
+						}
+						else if (panelMain.currentView == 6) {
+							if (mainContent.ticketList->size() + skip > 16 && skip < mainContent.ticketList->size() - 16) {
+								skip++;
+								mainContent.printTickets(skip);
+							}
+						}
+						break;
 			default:
 				break;
+					}
+				}
 			}
 		}
 		else {
