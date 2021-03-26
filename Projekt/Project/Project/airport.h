@@ -22,6 +22,7 @@ public:
 	void listConnections();
 	void listStaff();
 	Connection* searchForConnection(std::string code);
+	void remove(std::string code);
 
 	std::list<Connection*> connectionList;
 	std::list<Staff*> staffList;

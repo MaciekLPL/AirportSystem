@@ -41,3 +41,10 @@ Connection* Airport::searchForConnection(std::string code) {
 
 	return *result;
 }
+
+void Airport::remove(std::string code) {
+	connectionList.erase(
+		std::remove_if(connectionList.begin(), connectionList.end(), 
+		[&code](const Connection& connection) { return connection.connectionCode == code; }), 
+		connectionList.end());
+}

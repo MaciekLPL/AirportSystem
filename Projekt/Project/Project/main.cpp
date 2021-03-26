@@ -90,7 +90,7 @@ int main() {
 	mainConnList.push_back(&c4);
 
 	l1.addConnection(&c1);
-	l1.addConnection(&c2);
+	l2.addConnection(&c2);
 	l1.addConnection(&c3);
 	l4.addConnection(&c4);
 
@@ -152,8 +152,7 @@ int main() {
 
 	std::cout << t1 << std::endl;
 
-	std::cout << (*l1.searchForConnection("POL1-2"));
-	std::cout << (*l2.searchForConnection("POL2-3"));*/
+	std::cout << (*l1.searchForConnection("POL1-2"));*/
 	
 	int skip = 0;
 	mainContent.printCities();
@@ -165,7 +164,9 @@ int main() {
 			c = _getch();
 			switch (c) {
 			case 0x4B:		//lewo
-				//panelMain.clearPanelContent();
+				//l2.remove("POL2-3");
+				//l2.listConnections();
+
 				break;
 			case 0x4D:		//prawo
 				//panelRight.clearPanelContent();
