@@ -117,8 +117,6 @@ void View::clearPanelContent() {
 		}
 		gotoxy(startX + 1, i + 1);
 	}
-
-	updateTitle(" ");
 }
 
 void View::gotoxy(int x, int y) {

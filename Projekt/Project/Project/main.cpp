@@ -151,17 +151,19 @@ int main() {
 	panelMain.ShowConsoleCursor(0);
 	
 	while (1) {
+		
 		int c = _getch();
+		
 		if (c == 0xE0) {
 			c = _getch();
 			switch (c) {
-			case 0x4B:		//lewo
-				//l2.remove("POL2-3");
-				//l2.listConnections();
-				break;
-			case 0x4D:		//prawo
-				//panelRight.clearPanelContent();
-				break;
+			//case 0x4B:		//lewo
+			//	l2.remove("POL2-3");
+			//	l2.listConnections();
+			//	break;
+			//case 0x4D:		//prawo
+			//	panelRight.clearPanelContent();
+			//	break;
 			case 0x48:		//góra
 				mainContent.scrollUp();
 				break;
@@ -178,8 +180,11 @@ int main() {
 			mainContent.changeCurrentContent();
 		}
 
-		else if (c == 47) //tylda
+		else if (c == 47) {	//slash
+			panelBottom.clearPanelContent();
 			cmdHandler.getCommand();
+			mainContent.refreshContent();
+		}
 
 		else if (c == 27)	//esc
 			break;

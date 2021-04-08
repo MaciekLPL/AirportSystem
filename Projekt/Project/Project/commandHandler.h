@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <regex>
 
 class View;
 class Content;
@@ -17,10 +18,13 @@ public:
 private:
 	View* parentView;
 	Content* mainContent;
+	std::string currentCmd;
 
 	std::string getToken(std::string& s);
-	void splitCommand(std::string cmd);
-	void addCommand(std::string cmd);
+	void printError(std::string errorString);
+	void splitCommand();
+	void addCommand();
+	void addCity();
 
 };
 
