@@ -16,7 +16,7 @@
 
 int main() {
 
-	View panelMain(22, 1, 97, 22, " ");
+	View panelMain(22, 1, 97, 22);
 	View panelBottom(11, 23, 109, 27, "Command line");
 	
 	Content mainContent(&panelMain);
@@ -146,10 +146,10 @@ int main() {
 
 	std::cout << t1 << std::endl;
 	std::cout << (*l1.searchForConnection("POL1-2"));*/
-	
-	mainContent.printCities();
+
 	panelMain.ShowConsoleCursor(0);
-	
+	mainContent.refreshContent();
+
 	while (1) {
 		
 		int c = _getch();
@@ -176,7 +176,6 @@ int main() {
 		}
 
 		else if (c == 9) {	//tab
-			panelMain.clearPanelContent();
 			mainContent.changeCurrentContent();
 		}
 
@@ -186,8 +185,9 @@ int main() {
 			mainContent.refreshContent();
 		}
 
-		else if (c == 27)	//esc
+		else if (c == 27) {	//esc
 			break;
+		}
 	}
 
 	system("cls");	//koñcówka while

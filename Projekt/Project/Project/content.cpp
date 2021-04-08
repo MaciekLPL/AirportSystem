@@ -12,8 +12,8 @@ Content::Content(View* _parentView) {
 	this->parentView = _parentView;
 }
 
-
 void Content::changeCurrentContent() {
+	(*parentView).clearPanelContent();
 	skip = 0;
 	currentContent++;
 	if (currentContent == 1)
@@ -97,7 +97,6 @@ void Content::refreshContent() {
 }
 
 void Content::printCities() {
-
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);

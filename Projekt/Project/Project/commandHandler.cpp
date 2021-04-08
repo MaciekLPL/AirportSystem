@@ -44,7 +44,6 @@ void CommandHandler::printError(std::string errorString) {
 	(*parentView).clearPanelContent();
 	(*parentView).gotoxy((*parentView).startX + 2, (*parentView).startY + 3);
 	std::cout << errorString;
-
 }
 
 void CommandHandler::splitCommand() {
@@ -55,7 +54,7 @@ void CommandHandler::splitCommand() {
 	if (token == "ADD")
 		addCommand();
 	else if (token == "REMOVE")
-		return;
+		removeCommand();
 	else
 		printError("Invalid command. Use 'add' or 'remove'.");
 }
@@ -67,6 +66,17 @@ void CommandHandler::addCommand() {
 
 	if (type == "CITY")
 		addCity();
+	else
+		printError("Invalid data type.");
+}
+
+void CommandHandler::removeCommand() {
+
+	std::string type = getToken(currentCmd);
+	std::transform(type.begin(), type.end(), type.begin(), ::toupper);
+
+	if (type == "CITY")
+		removeCity();
 	else
 		printError("Invalid data type.");
 }
@@ -85,4 +95,20 @@ void CommandHandler::addCity() {
 	}
 	else
 		printError("Invalid data. Use 'add City CityName PostalCode'.");
+}
+
+void CommandHandler::removeCity() {
+
+	std::string cityName = getToken(currentCmd);
+	const size_t orgSize = (*mainContent).cityList.size();
+
+	(*mainContent).cityList.erase(
+		std::remove_if((*mainContent).cityList.begin(), (*mainContent).cityList.end(),
+		[cityName](const City& city) { return city.cityName == cityName; }),
+		(*mainContent).cityList.end());
+
+	if ((*mainContent).cityList.size() == orgSize)
+		printError("Couldn't remove city.");
+	else
+		(*parentView).clearPanelContent();
 }

@@ -17,16 +17,9 @@ class View;
 class Content {
 public:
 	class View* parentView;
-
 	Content(View* _parentView);
 
 	void changeCurrentContent();
-	void printCities();
-	void printAirports();
-	void printConnections();
-	void printStaff();
-	void printAirplanes();
-	void printTickets();
 	void scrollDown();
 	void scrollUp();
 	void refreshContent();
@@ -38,11 +31,16 @@ public:
 	std::list <Connection> connectionList;
 	std::list <Ticket> ticketList;
 
+private:
+	void printCities();
+	void printAirports();
+	void printConnections();
+	void printStaff();
+	void printAirplanes();
+	void printTickets();
+
 	int currentContent = 1;
 	int skip = 0;
-private:
-
-	
 };
 
 #endif

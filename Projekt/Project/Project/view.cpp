@@ -17,10 +17,7 @@ View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTit
 
 	//drawFrame();
 	drawView();
-	
-	if (!panelTitle.empty())
-		printTitle();
-
+	printTitle();
 }
 
 View::View(int _startX, int _startY, int _endX, int _endY) {
@@ -48,7 +45,7 @@ void View::drawView() {
 		}
 		gotoxy(startX, i + 1);
 	}
-	gotoxy(startX, startY);
+	gotoxy(startX, startY);			//rogi
 	putc(218, stdout);
 	gotoxy(endX, startY);
 	putc(191, stdout);
@@ -76,7 +73,8 @@ void View::drawFrame() {
 				putc(' ', stdout);
 		}
 	}
-	gotoxy(0, 0);
+
+	gotoxy(0, 0);					// rogi
 	putc(218, stdout);
 	gotoxy(width - 1, 0);
 	putc(191, stdout);
@@ -125,7 +123,6 @@ void View::gotoxy(int x, int y) {
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
-
 
 void View::ShowConsoleCursor(int showFlag) {
 

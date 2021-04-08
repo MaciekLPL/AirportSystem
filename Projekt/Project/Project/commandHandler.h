@@ -14,7 +14,6 @@ public:
 	CommandHandler(View* _parentView, Content* _mainContent);
 	void getCommand();
 
-
 private:
 	View* parentView;
 	Content* mainContent;
@@ -24,8 +23,10 @@ private:
 	void printError(std::string errorString);
 	void splitCommand();
 	void addCommand();
+	void removeCommand();
+	
 	void addCity();
-
+	void removeCity();
 };
 
 
