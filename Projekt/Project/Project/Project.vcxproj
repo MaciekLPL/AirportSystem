@@ -143,6 +143,7 @@
     <ClCompile Include="airport.cpp" />
     <ClCompile Include="city.cpp" />
     <ClCompile Include="city.h" />
+    <ClCompile Include="commandHandler.cpp" />
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="content.cpp" />
     <ClCompile Include="content.h" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClInclude Include="airplane.h" />
     <ClInclude Include="connection.h" />
+    <ClInclude Include="commandHandler.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="ticket.h" />
     <ClInclude Include="view.h" />

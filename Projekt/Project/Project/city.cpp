@@ -7,10 +7,6 @@ City::City(std::string name, std::string postal) {
 	this->postalCode = postal;
 }
 
-City::~City() {
-	this->airportList.clear();
-}
-
 void City::addAirport(Airport* airport) {
 	this->airportList.push_back(airport);
 	airport->pCity = this;

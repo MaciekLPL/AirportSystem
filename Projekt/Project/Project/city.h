@@ -9,9 +9,7 @@ class Airport;
 class City {
 public:
 
-	City() {};
 	City(std::string name, std::string postal);
-	~City();
 
 	void addAirport(Airport* airport);
 	void listAirports();

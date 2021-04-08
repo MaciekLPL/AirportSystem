@@ -26,7 +26,6 @@ public:
 	void clearPanelContent();
 	void gotoxy(int x, int y);
 
-	int currentView = 1;
 	int startX;
 	int startY;
 	int endX;

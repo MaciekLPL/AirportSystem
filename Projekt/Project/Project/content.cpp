@@ -9,27 +9,94 @@
 
 
 Content::Content(View* _parentView) {
-
 	this->parentView = _parentView;
-
 }
 
-Content::Content(View* _parentView, std::list <City*>* cityL, 
-	std::list <Airport*>* airportL, std::list <Airplane*>* airplaneL,
-	std::list <Staff*>* staffL, std::list <Connection*>* connL, 
-	std::list <Ticket*>* ticketL) {
 
-	this->parentView = _parentView;
-	this->cityList = cityL;
-	this->airportList = airportL;
-	this->airplaneList = airplaneL;
-	this->staffList = staffL;
-	this->connectionList = connL;
-	this->ticketList = ticketL;
-
+void Content::changeCurrentContent() {
+	skip = 0;
+	currentContent++;
+	if (currentContent == 1)
+		printCities();
+	else if (currentContent == 2)
+		printAirports();
+	else if (currentContent == 3)
+		printConnections();
+	else if (currentContent == 4)
+		printStaff();
+	else if (currentContent == 5)
+		printAirplanes();
+	else if (currentContent == 6) {
+		printTickets();
+		currentContent = 0;
+	}
 }
 
-void Content::printCities(int skip) {
+void Content::scrollUp() {
+
+	if (skip > 0){
+		skip--;
+		if (currentContent == 1)
+			printCities();
+		else if (currentContent == 2)
+			printAirports();
+		else if (currentContent == 3)
+			printConnections();
+		else if (currentContent == 4)
+			printStaff();
+		else if (currentContent == 5)
+			printAirplanes();
+		else if (currentContent == 6)
+			printTickets();
+	}
+}
+
+void Content::scrollDown() {
+	
+	if (currentContent == 1) {
+		if (cityList.size() + skip > 16 && skip < cityList.size() - 16) {
+			skip++;
+			printCities();
+		}
+	}
+	else if (currentContent == 2) {
+		if (airplaneList.size() + skip > 16 && skip < airportList.size() - 16) {
+			skip++;
+			printAirports();
+		}
+	}
+	else if (currentContent == 3) {
+		if (connectionList.size() + skip > 16 && skip < connectionList.size() - 16) {
+			skip++;
+			printConnections();
+		}
+	}
+	else if (currentContent == 4) {
+		if (staffList.size() + skip > 16 && skip < staffList.size() - 16) {
+			skip++;
+			printStaff();
+		}
+	}
+	else if (currentContent == 5) {
+		if (airplaneList.size() + skip > 16 && skip < airplaneList.size() - 16) {
+			skip++;
+			printAirplanes();
+		}
+	}
+	else if (currentContent == 6) {
+		if (ticketList.size() + skip > 16 && skip < ticketList.size() - 16) {
+			skip++;
+			printTickets();
+		}
+	}
+}
+
+void Content::refreshContent() {
+	currentContent--;
+	changeCurrentContent();
+}
+
+void Content::printCities() {
 
 
 	int i = parentView->startY + 3;
@@ -37,103 +104,125 @@ void Content::printCities(int skip) {
 	std::cout << std::left << std::setw(15) << "City" << std::setw(15) << "Postal code" << std::endl;
 	i++;
 
-	auto iter = (*cityList).begin();
+	auto iter = cityList.begin();
 	std::advance(iter, skip);
 
-	for (auto x = iter; x != (*cityList).end(); ++x) {
+	for (auto x = iter; x != cityList.end(); ++x) {
 		if (i >= 22) 
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*x)->cityName;
-		std::cout << std::setw(15) << std::left << (*x)->postalCode;
+		std::cout << std::setw(15) << std::left << x->cityName;
+		std::cout << std::setw(15) << std::left << x->postalCode;
 	}
-	parentView->updateTitle("Cities");
+	parentView->updateTitle("Cities (1/6)");
 }
 
-void Content::printAirports(int skip) {
+void Content::printAirports() {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Airport name" << std::setw(15) << "Airport code" << std::setw(15) << "City" << std::endl;
 	i++;
 
-	auto iter = (*cityList).begin();
+	auto iter = airportList.begin();
 	std::advance(iter, skip);
 
-	for (Airport* airport : *airportList) {
+	for (auto x = iter; x != airportList.end(); ++x) {
+		if (i >= 22)
+			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*airport).airportName;
-		std::cout << std::setw(15) << std::left << (*airport).airportCode;
-		std::cout << std::setw(15) << std::left << (*airport).pCity->cityName;
+		std::cout << std::setw(15) << std::left << x->airportName;
+		std::cout << std::setw(15) << std::left << x->airportCode;
+		std::cout << std::setw(15) << std::left << x->pCity->cityName;
 	}
-	parentView->updateTitle("Airports");
+	parentView->updateTitle("Airports (2/6)");
 }
 
-void Content::printConnections(int skip) {
+void Content::printConnections() {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Departure" << std::setw(10) << "Code" << std::setw(15) << "Arrival" << std::setw(10) << "Code" << std::setw(15) << "Connection" << std::endl;
 	i++;
+	
+	auto iter = connectionList.begin();
+	std::advance(iter, skip);
 
-	for (Connection* connection : *connectionList) {
+	for (auto x = iter; x != connectionList.end(); ++x) {
+		if (i >= 22)
+			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*connection).pOrigin->airportName;
-		std::cout << std::setw(10) << std::left << (*connection).pOrigin->airportCode;
-		std::cout << std::setw(15) << std::left << (*connection).pDestination->airportName;
-		std::cout << std::setw(10) << std::left << (*connection).pDestination->airportCode;
-		std::cout << std::setw(15) << std::left << (*connection).connectionCode;
+		std::cout << std::setw(15) << std::left << x->pOrigin->airportName;
+		std::cout << std::setw(10) << std::left << x->pOrigin->airportCode;
+		std::cout << std::setw(15) << std::left << x->pDestination->airportName;
+		std::cout << std::setw(10) << std::left << x->pDestination->airportCode;
+		std::cout << std::setw(15) << std::left << x->connectionCode;
 	}
-	parentView->updateTitle("Connections");
+	parentView->updateTitle("Connections (3/6)");
 }
 
 
-void Content::printStaff(int skip) {
+void Content::printStaff() {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Airport" << std::setw(20) << "Name" << std::setw(10) << "Age" << std::endl;
 	i++;
 
-	for (Staff* staff : *staffList) {
+	auto iter = staffList.begin();
+	std::advance(iter, skip);
+
+	for (auto x = iter; x != staffList.end(); ++x) {
+		if (i >= 22)
+			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*staff).airport->airportName;
-		std::cout << std::setw(20) << std::left << (*staff).name;
-		std::cout << std::setw(10) << std::left << (*staff).age;
+		std::cout << std::setw(15) << std::left << x->airport->airportName;
+		std::cout << std::setw(20) << std::left << x->name;
+		std::cout << std::setw(10) << std::left << x->age;
 	}
-	parentView->updateTitle("Staff");
+	parentView->updateTitle("Staff (4/6)");
 }
 
 
-void Content::printAirplanes(int skip) {
+void Content::printAirplanes() {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Airport" << std::setw(15) << "Registration" << std::setw(15) << "Type" << std::endl;
 	i++;
 
-	for (Airplane* airplane : *airplaneList) {
+	auto iter = airplaneList.begin();
+	std::advance(iter, skip);
+
+	for (auto x = iter; x != airplaneList.end(); ++x) {
+		if (i >= 22)
+			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*airplane).airport->airportName;
-		std::cout << std::setw(15) << std::left << (*airplane).registration;
-		std::cout << std::setw(15) << std::left << (*airplane).type;
+		std::cout << std::setw(15) << std::left << x->airport->airportName;
+		std::cout << std::setw(15) << std::left << x->registration;
+		std::cout << std::setw(15) << std::left << x->type;
 	}
-	parentView->updateTitle("Airplanes");
+	parentView->updateTitle("Airplanes (5/6)");
 }
 
 
-void Content::printTickets(int skip) {
+void Content::printTickets() {
 
 	int i = parentView->startY + 3;
 	parentView->gotoxy(parentView->startX + 2, i++);
 	std::cout << std::left << std::setw(15) << "Connection" << std::setw(15) << "Passengers" << std::setw(15) << "Price" << std::endl;
 	i++;
 
-	for (Ticket* ticket : *ticketList) {
+	auto iter = ticketList.begin();
+	std::advance(iter, skip);
+
+	for (auto x = iter; x != ticketList.end(); ++x) {
+		if (i >= 22)
+			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*ticket).connectionCode;
-		std::cout << std::setw(15) << std::left << (*ticket).numOfPassengers;
-		std::cout << std::setw(15) << std::left << (*ticket).price;
+		std::cout << std::setw(15) << std::left << x->connectionCode;
+		std::cout << std::setw(15) << std::left << x->numOfPassengers;
+		std::cout << std::setw(15) << std::left << x->price;
 	}
-	parentView->updateTitle("Tickets");
+	parentView->updateTitle("Tickets (6/6)");
 }

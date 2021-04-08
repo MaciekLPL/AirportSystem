@@ -15,7 +15,7 @@ View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTit
 	this->endY = _endY;
 	this->panelTitle = _panelTitle;
 
-	drawFrame();
+	//drawFrame();
 	drawView();
 	
 	if (!panelTitle.empty())
@@ -30,7 +30,7 @@ View::View(int _startX, int _startY, int _endX, int _endY) {
 	this->endX = _endX;
 	this->endY = _endY;
 
-	//drawFrame();
+	drawFrame();
 	drawView();
 }
 
