@@ -1,18 +1,19 @@
 #include <iostream>
-#include <list>
 #include <conio.h>
 #include <string>
+#include "commandHandler.h"
+#include "content.h"
+#include "view.h"
 #include "city.h"
 #include "airport.h"
-#include "connection.h"
 #include "staff.h"
 #include "airplane.h"
+#include "connection.h"
 #include "ticket.h"
-#include "view.h"
-#include "content.h"
-#include "commandHandler.h"
 
 
+int Staff::id = 0;
+int Ticket::id = 0;
 
 int main() {
 
@@ -49,23 +50,23 @@ int main() {
 	Airport l3("LNO3", "Lotnisko3");
 	Airport l4("LNO4", "Lotnisko4");
 
-	Connection c1(&l2, "POL1-2");
-	Connection c2(&l3, "POL2-3");
-	Connection c3(&l4, "POL3-4");
-	Connection c4(&l4, "POL4-5");
+	Connection c1(l2, "POL1-2");
+	Connection c2(l3, "POL2-3");
+	Connection c3(l4, "POL3-4");
+	Connection c4(l4, "POL4-5");
 
 	l1.addConnection(c1);
 	l2.addConnection(c2);
 	l1.addConnection(c3);
 	l4.addConnection(c4);
 
-	Ticket t1(&c1, 2, 200);
-	Ticket t2(&c1, 3, 300);
-	Ticket t3(&c1, 2, 400);
+	Ticket t1(c1, 2, 200);
+	Ticket t2(c1, 3, 300);
+	Ticket t3(c1, 2, 400);
 
-	Staff s1("Imie Nazwisko1", 30);
-	Staff s2("Imie Nazwisko2", 12);
-	Staff s3("Imie Nazwisko3", 32);
+	Staff s1("Imie1", "Nazw1", "Kierownik", 30);
+	Staff s2("Imie2", "Nazw2", "Zamiatacz", 24);
+	Staff s3("Imie3", "Nazw3", "Dyrektor", 32);
 
 	Airplane a1("SP-LLA", "B737");
 	Airplane a2("SP-PLA", "B787");

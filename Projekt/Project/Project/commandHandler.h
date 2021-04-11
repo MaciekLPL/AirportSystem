@@ -19,6 +19,13 @@ private:
 	Content* mainContent;
 	std::string currentCmd;
 
+	std::regex namePattern = std::regex("^[a-zA-Z-]+$");
+	std::regex postalCodePattern = std::regex("[0-9]{2}-[0-9]{3}");
+	std::regex airportCodePattern = std::regex("[A-Z]{4}");
+	std::regex registrationPattern = std::regex("[A-Z]{2}-[A-Z]{3}");
+	std::regex typePattern = std::regex("[A-Z][0-9]{3}");
+	std::regex connCodePattern = std::regex("[A-Z]{3}[0-9]{5}");
+
 	std::string getToken(std::string& s);
 	void printError(std::string errorString);
 	void splitCommand();
@@ -30,6 +37,18 @@ private:
 
 	void addAirport();
 	void removeAirport();
+
+	void addAirplane();
+	void removeAirplane();
+
+	void addStaff();
+	void removeStaff();
+
+	void addConnection();
+	void removeConnection();
+
+	void addTicket();
+	void removeTicket();
 };
 
 

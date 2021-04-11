@@ -6,10 +6,14 @@
 class Staff {
 public:
 	class Airport* pAirport;
+	static int id;
+	int thisID;
 	std::string name;
+	std::string surname;
+	std::string position;
 	int age;
 
-	Staff(std::string name, int age);
+	Staff(std::string name, std::string surname, std::string position, int age);
 
 private:
 

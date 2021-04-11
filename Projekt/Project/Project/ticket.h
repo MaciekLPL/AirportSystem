@@ -6,14 +6,19 @@
 class Airport;
 class Connection;
 
-class Ticket : public Connection{
+class Ticket {
 public:
+	static int id;
+	int thisID;
 
+	class Airport* pOrigin;
+	class Airport* pDestination;
+	std::string connectionCode;
 	int numOfPassengers;
 	int price;
+	
 
-	Ticket(Connection* connection, int _numOfPassengers, int _price);
-	friend std::ostream& operator<< (std::ostream& os, Ticket& t);
+	Ticket(Connection& connection, int _numOfPassengers, int _price);
 
 private:
 

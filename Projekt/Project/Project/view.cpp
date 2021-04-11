@@ -1,10 +1,4 @@
 #include "view.h"
-#include "city.h"
-#include "connection.h"
-#include "staff.h"
-#include "airplane.h"
-#include "ticket.h"
-#include "airport.h"
 
 
 View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTitle) {
@@ -15,7 +9,6 @@ View::View(int _startX, int _startY, int _endX, int _endY, std::string _panelTit
 	this->endY = _endY;
 	this->panelTitle = _panelTitle;
 
-	//drawFrame();
 	drawView();
 	printTitle();
 }

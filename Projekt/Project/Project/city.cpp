@@ -1,6 +1,9 @@
 #include "city.h"
 #include "airport.h"
-
+#include "staff.h"
+#include "airplane.h"
+#include "connection.h"
+#include "ticket.h"
 
 City::City(std::string name, std::string postal) {
 	this->cityName = name;
@@ -10,9 +13,4 @@ City::City(std::string name, std::string postal) {
 void City::addAirport(Airport& airport) {
 	airport.pCity = this;
 	this->airportList.push_back(airport);
-}
-
-void City::listAirports() {
-	for (Airport n : airportList)
-		std::cout << n.airportCode << " - " << n.airportName << " - " << n.pCity->cityName << std::endl;
 }
