@@ -8,8 +8,7 @@ class Connection;
 
 class Ticket : public Connection{
 public:
-	class Airport* pOrigin;
-	class Airport* pDestination;
+
 	int numOfPassengers;
 	int price;
 

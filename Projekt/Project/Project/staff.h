@@ -5,7 +5,7 @@
 
 class Staff {
 public:
-	class Airport* airport;
+	class Airport* pAirport;
 	std::string name;
 	int age;
 

@@ -27,6 +27,9 @@ private:
 	
 	void addCity();
 	void removeCity();
+
+	void addAirport();
+	void removeAirport();
 };
 
 

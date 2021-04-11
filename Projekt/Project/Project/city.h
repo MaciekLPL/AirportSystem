@@ -11,12 +11,12 @@ public:
 
 	City(std::string name, std::string postal);
 
-	void addAirport(Airport* airport);
+	void addAirport(Airport& airport);
 	void listAirports();
 
 	std::string cityName;
 	std::string postalCode;
-	std::list<Airport*> airportList;
+	std::list<Airport> airportList;
 private:
 };
 

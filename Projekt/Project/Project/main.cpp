@@ -72,12 +72,12 @@ int main() {
 	Airplane a3("SP-DLA", "B747");
 	Airplane a4("SP-SPA", "B777");
 
-	m1.addAirport(&l1);
-	m1.addAirport(&l2);
-	m1.addAirport(&l3);
-	m2.addAirport(&l4);
-	m2.addAirport(&l1);
-	m2.addAirport(&l2);
+	m1.addAirport(l1);
+	m1.addAirport(l2);
+	m1.addAirport(l3);
+	m2.addAirport(l4);
+	m2.addAirport(l1);
+	m2.addAirport(l2);
 
 	l1.addStaff(&s1);
 	l1.addStaff(&s2);
@@ -130,22 +130,6 @@ int main() {
 	mainContent.airplaneList.push_back(a2);
 	mainContent.airplaneList.push_back(a3);
 	mainContent.airplaneList.push_back(a4);
-
-	/*std::cout << std::endl;
-	m1.listAirports();
-	m2.listAirports();
-
-	l1.listConnections();
-	l2.listConnections();
-	l3.listConnections();
-	l4.listConnections();
-
-	l1.listStaff();
-	l2.listStaff();
-	l3.listStaff();
-
-	std::cout << t1 << std::endl;
-	std::cout << (*l1.searchForConnection("POL1-2"));*/
 
 	panelMain.ShowConsoleCursor(0);
 	mainContent.refreshContent();

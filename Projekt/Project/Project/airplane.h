@@ -5,7 +5,7 @@
 
 class Airplane {
 public:
-	class Airport* airport;
+	class Airport* pAirport;
 	std::string registration;
 	std::string type;
 	Airplane(std::string _registration, std::string _type);

@@ -175,7 +175,7 @@ void Content::printStaff() {
 		if (i >= 22)
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << x->airport->airportName;
+		std::cout << std::setw(15) << std::left << x->pAirport->airportName;
 		std::cout << std::setw(20) << std::left << x->name;
 		std::cout << std::setw(10) << std::left << x->age;
 	}
@@ -197,7 +197,7 @@ void Content::printAirplanes() {
 		if (i >= 22)
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << x->airport->airportName;
+		std::cout << std::setw(15) << std::left << x->pAirport->airportName;
 		std::cout << std::setw(15) << std::left << x->registration;
 		std::cout << std::setw(15) << std::left << x->type;
 	}

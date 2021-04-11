@@ -7,12 +7,12 @@ City::City(std::string name, std::string postal) {
 	this->postalCode = postal;
 }
 
-void City::addAirport(Airport* airport) {
+void City::addAirport(Airport& airport) {
+	airport.pCity = this;
 	this->airportList.push_back(airport);
-	airport->pCity = this;
 }
 
 void City::listAirports() {
-	for (Airport* n : airportList)
-		std::cout << (*n).airportCode << " - " << (*n).airportName << " - " << (*n).pCity->cityName << std::endl;
+	for (Airport n : airportList)
+		std::cout << n.airportCode << " - " << n.airportName << " - " << n.pCity->cityName << std::endl;
 }

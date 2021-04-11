@@ -10,18 +10,18 @@ Airport::Airport(std::string code, std::string name) {
 }
 
 void Airport::addConnection(Connection* pConnection) {
-	this->connectionList.push_back(pConnection);
 	pConnection->pOrigin = this;
+	this->connectionList.push_back(pConnection);
 }
 
 void Airport::addStaff(Staff* pStaff) {
+	pStaff->pAirport = this;
 	this->staffList.push_back(pStaff);
-	pStaff->airport = this;
 }
 
 void Airport::addAirplane(Airplane* pAirplane) {
+	pAirplane->pAirport = this;
 	this->airplaneList.push_back(pAirplane);
-	pAirplane->airport = this;
 }
 
 void Airport::listConnections() {
@@ -31,7 +31,7 @@ void Airport::listConnections() {
 
 void Airport::listStaff() {
 	for (Staff* x : staffList)
-		std::cout << (*x).airport->airportName << " - " << (*x).name << " - " << (*x).age << std::endl;
+		std::cout << (*x).pAirport->airportName << " - " << (*x).name << " - " << (*x).age << std::endl;
 }
 
 Connection* Airport::searchForConnection(std::string code) {
