@@ -16,17 +16,17 @@ public:
 	std::string airportName;
 
 	Airport(std::string code, std::string name);
-	void addConnection(Connection* connection);
-	void addStaff(Staff* pStaff);
-	void addAirplane(Airplane* pAirplane);
-	void listConnections();
-	void listStaff();
-	Connection* searchForConnection(std::string code);
+	void addConnection(Connection& connection);
+	void addStaff(Staff& pStaff);
+	void addAirplane(Airplane& pAirplane);
+	//void listConnections();
+	//void listStaff();
+	Connection searchForConnection(std::string code);
 	void remove(std::string code);
 
-	std::list<Connection*> connectionList;
-	std::list<Staff*> staffList;
-	std::list<Airplane*> airplaneList;
+	std::list<Connection> connectionList;
+	std::list<Staff> staffList;
+	std::list<Airplane> airplaneList;
 
 private:
 };

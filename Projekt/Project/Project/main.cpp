@@ -54,10 +54,10 @@ int main() {
 	Connection c3(&l4, "POL3-4");
 	Connection c4(&l4, "POL4-5");
 
-	l1.addConnection(&c1);
-	l2.addConnection(&c2);
-	l1.addConnection(&c3);
-	l4.addConnection(&c4);
+	l1.addConnection(c1);
+	l2.addConnection(c2);
+	l1.addConnection(c3);
+	l4.addConnection(c4);
 
 	Ticket t1(&c1, 2, 200);
 	Ticket t2(&c1, 3, 300);
@@ -79,14 +79,14 @@ int main() {
 	m2.addAirport(l1);
 	m2.addAirport(l2);
 
-	l1.addStaff(&s1);
-	l1.addStaff(&s2);
-	l1.addStaff(&s3);
+	l1.addStaff(s1);
+	l1.addStaff(s2);
+	l1.addStaff(s3);
 
-	l1.addAirplane(&a1);
-	l1.addAirplane(&a2);
-	l1.addAirplane(&a3);
-	l1.addAirplane(&a4);
+	l1.addAirplane(a1);
+	l1.addAirplane(a2);
+	l1.addAirplane(a3);
+	l1.addAirplane(a4);
 
 	mainContent.cityList.push_back(m1);
 	mainContent.cityList.push_back(m2);

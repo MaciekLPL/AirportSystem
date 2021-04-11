@@ -9,32 +9,32 @@ Airport::Airport(std::string code, std::string name) {
 	this->airportName = name;
 }
 
-void Airport::addConnection(Connection* pConnection) {
-	pConnection->pOrigin = this;
+void Airport::addConnection(Connection& pConnection) {
+	pConnection.pOrigin = this;
 	this->connectionList.push_back(pConnection);
 }
 
-void Airport::addStaff(Staff* pStaff) {
-	pStaff->pAirport = this;
+void Airport::addStaff(Staff& pStaff) {
+	pStaff.pAirport = this;
 	this->staffList.push_back(pStaff);
 }
 
-void Airport::addAirplane(Airplane* pAirplane) {
-	pAirplane->pAirport = this;
+void Airport::addAirplane(Airplane& pAirplane) {
+	pAirplane.pAirport = this;
 	this->airplaneList.push_back(pAirplane);
 }
 
-void Airport::listConnections() {
-	for (Connection* x : connectionList)
-		std::cout << (*x).pOrigin->airportName << " - " << (*x).pDestination->airportName << " - " << (*x).connectionCode << std::endl;
-}
+//void Airport::listConnections() {
+//	for (Connection* x : connectionList)
+//		std::cout << (*x).pOrigin->airportName << " - " << (*x).pDestination->airportName << " - " << (*x).connectionCode << std::endl;
+//}
+//
+//void Airport::listStaff() {
+//	for (Staff* x : staffList)
+//		std::cout << (*x).pAirport->airportName << " - " << (*x).name << " - " << (*x).age << std::endl;
+//}
 
-void Airport::listStaff() {
-	for (Staff* x : staffList)
-		std::cout << (*x).pAirport->airportName << " - " << (*x).name << " - " << (*x).age << std::endl;
-}
-
-Connection* Airport::searchForConnection(std::string code) {
+Connection Airport::searchForConnection(std::string code) {
 
 	auto result = std::find_if(connectionList.begin(), connectionList.end(), [&code](const Connection& connection)
 		{ return connection.connectionCode == code; });
