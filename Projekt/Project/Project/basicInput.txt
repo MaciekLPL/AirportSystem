@@ -1,0 +1,57 @@
+add City Warszawa 00-001
+add City Katowice 40-000
+add City Radom 26-600
+add City Krakow 30-001
+add City Wroclaw 50-001
+add City Gdansk 80-001
+add City Poznan 60-001
+add Airport Poznan EPPO Lawica
+add Airport Warszawa EPWA Chopin
+add Airport Warszawa EPMO Modlin
+add Airport Wroclaw EPWR Strachowice
+add Airport Radom EPRA Sadkow
+add Airport Gdansk EPGD Rebiechowo
+add Airport Katowice EPKT Pyrzowice
+add Airport Krakow EPKK Balice
+add Staff EPWA Jan Nowak Dyrektor 43
+add Staff EPMO Jan Kowalski Kierownik 41
+add Staff EPWR Adam Wojcik Dyrektor 35
+add Staff EPGD Marek Kolodziej Sprzatacz 24
+add Staff EPWA Filip Nowak Kierowca 54
+add Staff EPPO Patryk Kowalski Kontroler 37
+add Staff EPPO Leszek Zielinski Celnik 34
+add Connection EPWA EPMO ENT14351
+add Connection EPWR EPMO LOT13221
+add Connection EPKT EPWA WIZ43435
+add Connection EPPO EPRA LOT56312
+add Connection EPKK EPGD LOT56477
+add Connection EPWA EPPO RYR32447
+add Connection EPPO EPGD WIZ94437
+add Connection EPGD EPRA WIZ23453
+add Connection EPPO EPGD WIZ12555
+add Connection EPWA EPMO LOT12357
+add Airplane EPWA SP-LLA B737
+add Airplane EPWR SP-LPA B737
+add Airplane EPMO SP-LZA A320
+add Airplane EPKT SP-LFA B737
+add Airplane EPKK SP-LAA B737
+add Airplane EPWR SP-LDD A320
+add Airplane EPPO SP-LPF B737
+add Airplane EPRA SP-LFF B737
+add Airplane EPWA SP-LOT B787
+add Airplane EPKT SP-LOR B737
+add Airplane EPRA SP-LAT E195
+add Ticket RYR32447 2 100
+add Ticket WIZ23453 2 200
+add Ticket WIZ23453 2 200
+add Ticket LOT13221 2 400
+add Ticket LOT13221 3 500
+add Ticket LOT13221 3 400
+add Ticket LOT13221 3 300
+add Ticket RYR32447 1 500
+add Ticket ENT14351 1 300
+add Ticket LOT12357 2 200
+add Ticket LOT56477 3 300
+add Ticket LOT56477 3 300
+add Ticket WIZ12555 1 130
+add Ticket WIZ12555 1 240

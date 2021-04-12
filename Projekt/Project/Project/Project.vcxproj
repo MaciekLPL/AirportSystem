@@ -147,6 +147,7 @@
     <ClCompile Include="connection.cpp" />
     <ClCompile Include="content.cpp" />
     <ClCompile Include="content.h" />
+    <ClCompile Include="fileHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
     <ClCompile Include="staff.cpp" />
@@ -157,6 +158,7 @@
     <ClInclude Include="airplane.h" />
     <ClInclude Include="connection.h" />
     <ClInclude Include="commandHandler.h" />
+    <ClInclude Include="fileHandler.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="ticket.h" />
     <ClInclude Include="view.h" />

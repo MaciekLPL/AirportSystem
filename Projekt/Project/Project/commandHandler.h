@@ -13,11 +13,12 @@ class CommandHandler {
 public:
 	CommandHandler(View* _parentView, Content* _mainContent);
 	void getCommand();
+	void splitCommand();
+	std::string currentCmd;
 
 private:
 	View* parentView;
 	Content* mainContent;
-	std::string currentCmd;
 
 	std::regex namePattern = std::regex("^[a-zA-Z-]+$");
 	std::regex postalCodePattern = std::regex("[0-9]{2}-[0-9]{3}");
@@ -28,7 +29,6 @@ private:
 
 	std::string getToken(std::string& s);
 	void printError(std::string errorString);
-	void splitCommand();
 	void addCommand();
 	void removeCommand();
 	
