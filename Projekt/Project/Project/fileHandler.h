@@ -9,7 +9,6 @@ class CommandHandler;
 class FileHandler {
 public:
 	FileHandler(std::string _fileName, CommandHandler* _cmdHandler);
-	void readFile();
 
 private:
 	std::string fileName = "";

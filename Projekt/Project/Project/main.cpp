@@ -24,8 +24,16 @@ int main() {
 	Content mainContent(&panelMain);
 
 	CommandHandler cmdHandler(&panelBottom, &mainContent);
+	
+	try {
+		FileHandler inputFile("basicInput.txt", &cmdHandler);
+	}
 
-	FileHandler inputFile("basicInput.txt", &cmdHandler);
+	catch (std::ifstream::failure e) {
+		system("cls");
+		std::cerr << "Exception while reading file" << std::endl;
+		return 1;
+	}
 
 	panelMain.ShowConsoleCursor(0);
 	mainContent.refreshContent();

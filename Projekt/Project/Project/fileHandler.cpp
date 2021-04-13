@@ -7,28 +7,15 @@ FileHandler::FileHandler(std::string _fileName, CommandHandler* _cmdHandler) {
 	fileName = _fileName;
 	cmdHandler = _cmdHandler;
 
-	readFile();
-}
+	std::ifstream file;
+	file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
-void FileHandler::readFile() {
+	file.open(fileName);
 
-	try {
-
-		std::ifstream file(fileName);
-
-		if (file.is_open()) {
-			for (std::string line; getline(file, line); ) {
-				(*cmdHandler).currentCmd = line;
-				(*cmdHandler).splitCommand();
-			}
-		}
-		file.close();
+	for (std::string line; getline(file, line); ) {
+		(*cmdHandler).currentCmd = line;
+		(*cmdHandler).splitCommand();
 	}
 
-	catch (std::exception const& e) {
-		std::cout << "There was an error while opening file: " << e.what() << std::endl;
-	}
-
-
-	
+	file.close();
 }
