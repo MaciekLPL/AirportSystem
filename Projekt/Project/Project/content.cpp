@@ -26,9 +26,11 @@ void Content::changeCurrentContent() {
 		printStaff();
 	else if (currentContent == 5)
 		printAirplanes();
-	else if (currentContent == 6) {
+	else if (currentContent == 6)
 		printTickets();
-		currentContent = 0;
+	else {
+		currentContent = 1;
+		printCities();
 	}
 }
 

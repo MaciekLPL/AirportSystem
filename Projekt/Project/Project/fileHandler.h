@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <exception>
 
 class CommandHandler;
 

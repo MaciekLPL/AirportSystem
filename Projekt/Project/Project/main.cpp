@@ -25,17 +25,17 @@ int main() {
 
 	CommandHandler cmdHandler(&panelBottom, &mainContent);
 	
+	panelMain.ShowConsoleCursor(0);
+
 	try {
 		FileHandler inputFile("basicInput.txt", &cmdHandler);
 	}
-
-	catch (std::ifstream::failure e) {
+	catch (std::exception& e) {
 		system("cls");
-		std::cerr << "Exception while reading file" << std::endl;
+		std::cerr << "Exception while reading file: " << e.what() << std::endl;
 		return 1;
 	}
 
-	panelMain.ShowConsoleCursor(0);
 	mainContent.refreshContent();
 
 	while (1) {
@@ -45,19 +45,15 @@ int main() {
 		if (c == 0xE0) {
 			c = _getch();
 			switch (c) {
-			//case 0x4B:		//lewo
-			//	l2.remove("POL2-3");
-			//	l2.listConnections();
-			//	break;
-			//case 0x4D:		//prawo
-			//	panelRight.clearPanelContent();
-			//	break;
+
 			case 0x48:		//góra
 				mainContent.scrollUp();
 				break;
+			
 			case 0x50:		//dó³
 				mainContent.scrollDown();
 				break;
+
 			default:
 				break;
 			}
