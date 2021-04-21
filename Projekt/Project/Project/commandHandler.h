@@ -8,6 +8,9 @@
 
 class View;
 class Content;
+class City;
+class Airport;
+class Connection;
 
 class CommandHandler {
 public:
@@ -37,18 +40,26 @@ private:
 
 	void addAirport();
 	void removeAirport();
+	void delAirports(std::shared_ptr<City> c);
 
 	void addAirplane();
 	void removeAirplane();
+	void delAirplanes(std::shared_ptr<Airport> a);
 
 	void addStaff();
 	void removeStaff();
+	void delStaff(std::shared_ptr<Airport> a);
 
 	void addConnection();
 	void removeConnection();
+	void delConns(std::shared_ptr<Airport> a);
 
 	void addTicket();
 	void removeTicket();
+	void delTickets(std::shared_ptr<Connection> c);
+
+	void refreshLists();
+
 };
 
 

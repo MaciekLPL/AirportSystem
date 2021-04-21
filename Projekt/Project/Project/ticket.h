@@ -18,7 +18,7 @@ public:
 	int price;
 	
 
-	Ticket(Connection& connection, int _numOfPassengers, int _price);
+	Ticket(std::shared_ptr<Connection> connection, int _numOfPassengers, int _price);
 
 private:
 

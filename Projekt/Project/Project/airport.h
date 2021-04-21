@@ -4,6 +4,7 @@
 #include <iostream>
 #include <list>
 
+class City;
 class Connection;
 class Staff;
 class Airplane;
@@ -16,13 +17,14 @@ public:
 	std::string airportName;
 
 	Airport(std::string code, std::string name);
-	void addConnection(Connection& connection);
-	void addStaff(Staff& pStaff);
-	void addAirplane(Airplane& pAirplane);
+	~Airport();
+	void addConnection(std::shared_ptr<Connection> connection);
+	void addStaff(std::shared_ptr<Staff> pStaff);
+	void addAirplane(std::shared_ptr<Airplane> pAirplane);
 
-	std::list<Connection> connectionList;
-	std::list<Staff> staffList;
-	std::list<Airplane> airplaneList;
+	std::list<std::shared_ptr<Connection>> connectionList;
+	std::list<std::shared_ptr<Staff>> staffList;
+	std::list<std::shared_ptr<Airplane>> airplaneList;
 
 private:
 };

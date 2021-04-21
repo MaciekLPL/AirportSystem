@@ -14,10 +14,11 @@ public:
 	class Airport* pOrigin;
 	class Airport* pDestination;
 	std::string connectionCode;
-	
-	Connection(Airport& destination, std::string code);
-	void addTicket(Ticket& pTicket);
-	std::list<Ticket> ticketList;
+
+	Connection(std::shared_ptr<Airport> destination, std::string code);
+	~Connection();
+	void addTicket(std::shared_ptr<Ticket> pTicket);
+	std::list<std::shared_ptr<Ticket>> ticketList;
 
 private:
 

@@ -24,12 +24,12 @@ public:
 	void scrollUp();
 	void refreshContent();
 
-	std::list <City> cityList;
-	std::list <Airport> airportList;
-	std::list <Airplane> airplaneList;
-	std::list <Staff> staffList;
-	std::list <Connection> connectionList;
-	std::list <Ticket> ticketList;
+	std::list <std::shared_ptr<City>> cityList;
+	std::list <std::shared_ptr<Airport>> airportList;
+	std::list <std::shared_ptr<Airplane>> airplaneList;
+	std::list <std::shared_ptr<Staff>> staffList;
+	std::list <std::shared_ptr<Connection>> connectionList;
+	std::list <std::shared_ptr<Ticket>> ticketList;
 
 private:
 	void printCities();

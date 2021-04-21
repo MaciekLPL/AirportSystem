@@ -5,14 +5,14 @@ add City Krakow 30-001
 add City Wroclaw 50-001
 add City Gdansk 80-001
 add City Poznan 60-001
-add Airport Poznan EPPO Lawica
-add Airport Warszawa EPWA Chopin
-add Airport Warszawa EPMO Modlin
-add Airport Wroclaw EPWR Strachowice
-add Airport Radom EPRA Sadkow
-add Airport Gdansk EPGD Rebiechowo
-add Airport Katowice EPKT Pyrzowice
-add Airport Krakow EPKK Balice
+add Airport 60-001 EPPO Lawica
+add Airport 00-001 EPWA Chopin
+add Airport 00-001 EPMO Modlin
+add Airport 50-001 EPWR Strachowice
+add Airport 26-600 EPRA Sadkow
+add Airport 80-001 EPGD Rebiechowo
+add Airport 40-000 EPKT Pyrzowice
+add Airport 30-001 EPKK Balice
 add Staff EPWA Jan Nowak Dyrektor 43
 add Staff EPMO Jan Kowalski Kierownik 41
 add Staff EPWR Adam Wojcik Dyrektor 35

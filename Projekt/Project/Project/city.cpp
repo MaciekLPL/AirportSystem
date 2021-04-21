@@ -10,7 +10,14 @@ City::City(std::string name, std::string postal) {
 	this->postalCode = postal;
 }
 
-void City::addAirport(Airport& airport) {
-	airport.pCity = this;
+City::~City() {
+	/*while (!airportList.empty()) {
+		airportList.pop_front();
+	}*/
+	airportList.clear();
+}
+
+void City::addAirport(std::shared_ptr<Airport> airport) {
+	airport->pCity = this;
 	this->airportList.push_back(airport);
 }

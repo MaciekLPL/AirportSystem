@@ -2,12 +2,20 @@
 #include "connection.h"
 #include "ticket.h"
 
-Connection::Connection(Airport& destination, std::string code) {
+Connection::Connection(std::shared_ptr<Airport> destination, std::string code) {
 
-	this->pDestination = &destination;
-	this->connectionCode = code;
+	pDestination = destination.get();
+	connectionCode = code;
 }
 
-void Connection::addTicket(Ticket& pTicket) {
+Connection::~Connection() {
+
+	/*while (!ticketList.empty()) {
+		ticketList.pop_front();
+	}*/
+	ticketList.clear();
+}
+
+void Connection::addTicket(std::shared_ptr<Ticket> pTicket) {
 	this->ticketList.push_back(pTicket);
 }

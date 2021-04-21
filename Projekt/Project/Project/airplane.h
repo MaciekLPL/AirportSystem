@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+class Airport;
+
 class Airplane {
 public:
 	class Airport* pAirport;

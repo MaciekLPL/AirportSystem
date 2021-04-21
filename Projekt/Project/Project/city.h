@@ -10,12 +10,12 @@ class City {
 public:
 
 	City(std::string name, std::string postal);
-
-	void addAirport(Airport& airport);
+	~City();
+	void addAirport(std::shared_ptr<Airport> airport);
 
 	std::string cityName;
 	std::string postalCode;
-	std::list<Airport> airportList;
+	std::list<std::shared_ptr<Airport>> airportList;
 
 
 private:

@@ -17,12 +17,12 @@ CommandHandler::CommandHandler(View* _parentView, Content* _mainContent) {
 
 void CommandHandler::getCommand() {
 
-	(*parentView).ShowConsoleCursor(1);
+	parentView->ShowConsoleCursor(1);
 
-	(*parentView).gotoxy((*parentView).startX + 2, (*parentView).startY + 3);
+	parentView->gotoxy(parentView->startX + 2, parentView->startY + 3);
 	std::getline(std::cin, currentCmd);
 
-	(*parentView).ShowConsoleCursor(0);
+	parentView->ShowConsoleCursor(0);
 
 	if (currentCmd.empty())
 		return;
@@ -45,8 +45,8 @@ std::string CommandHandler::getToken(std::string& s) {
 
 void CommandHandler::printError(std::string errorString) {
 
-	(*parentView).clearPanelContent();
-	(*parentView).gotoxy((*parentView).startX + 2, (*parentView).startY + 3);
+	parentView->clearPanelContent();
+	parentView->gotoxy(parentView->startX + 2, parentView->startY + 3);
 	std::cout << errorString;
 }
 
@@ -118,73 +118,39 @@ void CommandHandler::addCity() {
 	if ((std::regex_match(cityName, namePattern)) && 
 		(std::regex_match(postalCode, postalCodePattern))) {
 
-		(*mainContent).cityList.push_back(City(cityName, postalCode));
-		(*parentView).clearPanelContent();
+		auto tmp = std::make_shared<City>(cityName, postalCode);
+		mainContent->cityList.push_back(tmp);
+		parentView->clearPanelContent();
 	}
 	else
 		printError("Invalid data. Use 'add City [CityName] [PostalCode]'.");
 }
 
 
-void CommandHandler::removeCity() {
-
-	std::string cityName = getToken(currentCmd);
-	const size_t orgSize = (*mainContent).cityList.size();
-
-	(*mainContent).cityList.erase(
-		std::remove_if((*mainContent).cityList.begin(), (*mainContent).cityList.end(),
-		[cityName](const City& city) { return city.cityName == cityName; }),
-		(*mainContent).cityList.end());
-
-	if ((*mainContent).cityList.size() == orgSize)
-		printError("Couldn't remove city.");
-	else
-		(*parentView).clearPanelContent();
-}
-
-
 void CommandHandler::addAirport() {
 
-	std::string cityName = getToken(currentCmd);
+	std::string postalCode = getToken(currentCmd);
 	std::string airportCode = getToken(currentCmd);
 	std::string airportName = getToken(currentCmd);
 
-	auto parentCity = std::find_if(std::begin((*mainContent).cityList), std::end((*mainContent).cityList),
-		[cityName](City const& c) { return c.cityName == cityName; });
+	auto parentCity = std::find_if(std::begin(mainContent->cityList), std::end(mainContent->cityList),
+		[&](std::shared_ptr<City> c) { return c->postalCode == postalCode; });
 
-	if (parentCity == (*mainContent).cityList.end()) {
+	if (parentCity == mainContent->cityList.end()) {
 		printError("Invalid data. Couldn't find given city.");
 		return;
 	}
 
-	if ((std::regex_match(airportCode, airportCodePattern)) && 
+	if ((std::regex_match(airportCode, airportCodePattern)) &&
 		(std::regex_match(airportName, namePattern))) {
-		
-		Airport tmp = Airport(airportCode, airportName);
-		(*parentCity).addAirport(tmp);
-		(*mainContent).airportList.push_back(tmp);
-		(*parentView).clearPanelContent();
+
+		auto tmp = std::make_shared<Airport>(airportCode, airportName);
+		mainContent->airportList.push_back(tmp);
+		(*parentCity)->addAirport(tmp);
+		parentView->clearPanelContent();
 	}
 	else
 		printError("Invalid data. Use 'add Airport [ExistingCity] [AirportCode] [AirportName]'.");
-}
-
-
-void CommandHandler::removeAirport() {
-
-	std::string airportCode = getToken(currentCmd);
-	const size_t orgSize = (*mainContent).airportList.size();
-
-	(*mainContent).airportList.erase(
-		std::remove_if((*mainContent).airportList.begin(), (*mainContent).airportList.end(),
-			[airportCode](const Airport& a) { return a.airportCode == airportCode; }),
-		(*mainContent).airportList.end());
-
-
-	if ((*mainContent).airportList.size() == orgSize)
-		printError("Couldn't remove airport.");
-	else
-		(*parentView).clearPanelContent();
 }
 
 
@@ -194,11 +160,10 @@ void CommandHandler::addAirplane() {
 	std::string registation = getToken(currentCmd);
 	std::string type = getToken(currentCmd);
 
+	auto parentAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
+		[&](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
 
-	auto parentAirport = std::find_if(std::begin((*mainContent).airportList), std::end((*mainContent).airportList),
-		[airportCode](Airport const& a) { return a.airportCode == airportCode; });
-
-	if (parentAirport == (*mainContent).airportList.end()) {
+	if (parentAirport == mainContent->airportList.end()) {
 		printError("Invalid data. Couldn't find given airport.");
 		return;
 	}
@@ -206,78 +171,49 @@ void CommandHandler::addAirplane() {
 	if ((std::regex_match(registation, registrationPattern)) &&
 		(std::regex_match(type, typePattern))) {
 
-		Airplane tmp = Airplane(registation, type);
-		(*parentAirport).addAirplane(tmp);
-		(*mainContent).airplaneList.push_back(tmp);
-		(*parentView).clearPanelContent();
+		auto tmp = std::make_shared<Airplane>(registation, type);
+		mainContent->airplaneList.push_back(tmp);
+		(*parentAirport)->addAirplane(tmp);
+		parentView->clearPanelContent();
 	}
 	else
 		printError("Invalid data. Use 'add Airplane [ExistingAirport] [Registration] [Type]'.");
 }
 
 
-void CommandHandler::removeAirplane() {
-	
-	std::string registration = getToken(currentCmd);
-	const size_t orgSize = (*mainContent).airplaneList.size();
+void CommandHandler::addStaff() {
 
-	(*mainContent).airplaneList.erase(
-		std::remove_if((*mainContent).airplaneList.begin(), (*mainContent).airplaneList.end(),
-			[registration](const Airplane& a) { return a.registration == registration; }),
-		(*mainContent).airplaneList.end());
+	try {
+		std::string airportCode = getToken(currentCmd);
+		std::string name = getToken(currentCmd);
+		std::string surname = getToken(currentCmd);
+		std::string position = getToken(currentCmd);
+		int age = std::stoi(getToken(currentCmd));
 
+		auto parentAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
+			[airportCode](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
 
-	if ((*mainContent).airplaneList.size() == orgSize)
-		printError("Couldn't remove airplane.");
-	else
-		(*parentView).clearPanelContent();
-}
+		if (parentAirport == mainContent->airportList.end()) {
+			printError("Invalid data. Couldn't find given airport.");
+			return;
+		}
 
+		if ((std::regex_match(name, namePattern)) &&
+			(std::regex_match(surname, namePattern)) &&
+			(std::regex_match(position, namePattern))) {
 
-void CommandHandler::addStaff(){
-	std::string airportCode = getToken(currentCmd);
-	std::string name = getToken(currentCmd);
-	std::string surname = getToken(currentCmd);
-	std::string position = getToken(currentCmd);
-	int age = std::stoi(getToken(currentCmd));
-
-
-	auto parentAirport = std::find_if(std::begin((*mainContent).airportList), std::end((*mainContent).airportList),
-		[airportCode](Airport const& a) { return a.airportCode == airportCode; });
-
-	if (parentAirport == (*mainContent).airportList.end()) {
-		printError("Invalid data. Couldn't find given airport.");
+			auto tmp = std::make_shared<Staff>(name, surname, position, age);
+			mainContent->staffList.push_back(tmp);
+			(*parentAirport)->addStaff(tmp);
+			parentView->clearPanelContent();
+		}
+		else
+			throw;
+	}
+	catch (...) {
+		printError("Invalid data. Use 'add Staff [ExistingAirport] [Name] [Surname] [Position] [Age]'.");
 		return;
 	}
-
-	if ((std::regex_match(name, namePattern)) &&
-		(std::regex_match(surname, namePattern)) &&
-		(std::regex_match(position, namePattern))) {
-
-		Staff tmp = Staff(name, surname, position, age);
-		(*parentAirport).addStaff(tmp);
-		(*mainContent).staffList.push_back(tmp);
-		(*parentView).clearPanelContent();
-	}
-	else
-		printError("Invalid data. Use 'add Staff [ExistingAirport] [Name] [Surname] [Position] [Age]'.");
-}
-
-
-void CommandHandler::removeStaff() {
-	int id = std::stoi(getToken(currentCmd));
-	const size_t orgSize = (*mainContent).staffList.size();
-
-	(*mainContent).staffList.erase(
-		std::remove_if((*mainContent).staffList.begin(), (*mainContent).staffList.end(),
-			[id](const Staff& s) { return s.thisID == id; }),
-		(*mainContent).staffList.end());
-
-
-	if ((*mainContent).staffList.size() == orgSize)
-		printError("Couldn't remove staff.");
-	else
-		(*parentView).clearPanelContent();
 }
 
 
@@ -287,83 +223,192 @@ void CommandHandler::addConnection() {
 	std::string connCode = getToken(currentCmd);
 
 
-	auto orgAirport = std::find_if(std::begin((*mainContent).airportList), std::end((*mainContent).airportList),
-		[orgAirportCode](Airport const& a) { return a.airportCode == orgAirportCode; });
+	auto orgAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
+		[&](std::shared_ptr<Airport> a) { return a->airportCode == orgAirportCode; });
 
-	auto destAirport = std::find_if(std::begin((*mainContent).airportList), std::end((*mainContent).airportList),
-		[destAirportCode](Airport const& a) { return a.airportCode == destAirportCode; });
+	auto destAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
+		[&](std::shared_ptr<Airport> a) { return a->airportCode == destAirportCode; });
 
-	if (orgAirport == (*mainContent).airportList.end() || destAirport == (*mainContent).airportList.end()) {
+	if (orgAirport == mainContent->airportList.end() || destAirport == mainContent->airportList.end()) {
 		printError("Invalid data. Couldn't find given airports.");
 		return;
 	}
 
 	if ((std::regex_match(connCode, connCodePattern))) {
 
-		Connection tmp = Connection(*destAirport, connCode);
-		(*orgAirport).addConnection(tmp);
-		(*mainContent).connectionList.push_back(tmp);
-		(*parentView).clearPanelContent();
+		auto tmp = std::make_shared<Connection>(*destAirport, connCode);
+		(*orgAirport)->addConnection(tmp);
+		mainContent->connectionList.push_back(tmp);
+		parentView->clearPanelContent();
 	}
 	else
 		printError("Invalid data. Use 'add Connection [From (Airport Code)] [To (Airport Code)] [Connection Code]'.");
 }
 
 
-void CommandHandler::removeConnection() {
-	std::string connCode = getToken(currentCmd);
-	const size_t orgSize = (*mainContent).connectionList.size();
-
-	(*mainContent).connectionList.erase(
-		std::remove_if((*mainContent).connectionList.begin(), (*mainContent).connectionList.end(),
-			[connCode](const Connection& c) { return c.connectionCode == connCode; }),
-		(*mainContent).connectionList.end());
-
-
-	if ((*mainContent).staffList.size() == orgSize)
-		printError("Couldn't remove connection.");
-	else
-		(*parentView).clearPanelContent();
-}
-
 void CommandHandler::addTicket() {
-	std::string connCode = getToken(currentCmd);
-	int numOfPassenger = stoi(getToken(currentCmd));
-	int price = stoi(getToken(currentCmd));
+	
+	try {
+		std::string connCode = getToken(currentCmd);
+		int numOfPassenger = stoi(getToken(currentCmd));
+		int price = stoi(getToken(currentCmd));
 
+		auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
+			[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
 
-	auto connection = std::find_if(std::begin((*mainContent).connectionList), std::end((*mainContent).connectionList),
-		[connCode](Connection const& c) { return c.connectionCode == connCode; });
+		if (connection == mainContent->connectionList.end()) {
+			printError("Invalid data. Couldn't find given connection.");
+			return;
+		}
 
-
-	if (connection == (*mainContent).connectionList.end()) {
-		printError("Invalid data. Couldn't find given connection.");
+		if (numOfPassenger != 0) {
+			auto tmp = std::make_shared<Ticket>(*connection, numOfPassenger, price);
+			(*connection)->addTicket(tmp);
+			mainContent->ticketList.push_back(tmp);
+			parentView->clearPanelContent();
+		}
+		else
+			throw;
+	}
+	catch (...) {
+		printError("Invalid data. Use 'add Ticket [Connection code] [No. of passengers] [Price]'.");
 		return;
 	}
-
-	if (numOfPassenger > 0) {
-
-		Ticket tmp = Ticket(*connection, numOfPassenger, price);
-		(*connection).addTicket(tmp);
-		(*mainContent).ticketList.push_back(tmp);
-		(*parentView).clearPanelContent();
-	}
-	else
-		printError("Invalid data. Use 'add Ticket [Connection code] [No. of passengers] [Price]'.");
 }
+
+
+void CommandHandler::removeCity() {
+
+	std::string postalCode = getToken(currentCmd);
+	const size_t orgSize = mainContent->cityList.size();
+
+	auto city = std::find_if(std::begin(mainContent->cityList), std::end(mainContent->cityList),
+		[&](std::shared_ptr<City> c) { return c->postalCode == postalCode; });
+
+	delAirports(*city);
+	mainContent->cityList.erase(city);
+
+	if (mainContent->cityList.size() == orgSize)
+		printError("Couldn't remove city.");
+	else
+		parentView->clearPanelContent();
+}
+
+
+void CommandHandler::removeAirport() {
+
+	std::string airportCode = getToken(currentCmd);
+	const size_t orgSize = mainContent->airportList.size();
+
+	auto airport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
+		[&](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
+
+	delConns(*airport);
+	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport == (*airport).get(); });
+	mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport == (*airport).get(); });
+	mainContent->airportList.erase(airport);
+
+	if (mainContent->airportList.size() == orgSize)
+		printError("Couldn't remove airport.");
+	else
+		parentView->clearPanelContent();
+}
+
+
+void CommandHandler::removeAirplane() {
+	
+	std::string registration = getToken(currentCmd);
+	const size_t orgSize = mainContent->airplaneList.size();
+
+	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->registration == registration; });
+
+	if (mainContent->airplaneList.size() == orgSize)
+		printError("Couldn't remove airplane.");
+	else
+		parentView->clearPanelContent();
+}
+
+
+void CommandHandler::removeStaff() {
+
+	try {
+		int id = std::stoi(getToken(currentCmd));
+		const size_t orgSize = mainContent->staffList.size();
+
+		mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->thisID == id; });
+
+		if (mainContent->staffList.size() == orgSize)
+			printError("Couldn't remove staff.");
+		else
+			parentView->clearPanelContent();
+	}
+	catch (...) {
+		printError("Invalid data. Use 'remove Staff [id].");
+		return;
+	}
+}
+
+
+void CommandHandler::removeConnection() {
+	std::string connCode = getToken(currentCmd);
+	const size_t orgSize = mainContent->connectionList.size();
+
+	auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
+		[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
+
+	mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->connectionCode == (*connection)->connectionCode; });
+	mainContent->connectionList.erase(connection);
+
+	if (mainContent->staffList.size() == orgSize)
+		printError("Couldn't remove connection.");
+	else
+		parentView->clearPanelContent();
+}
+
 
 void CommandHandler::removeTicket() {
-	int id = std::stoi(getToken(currentCmd));
-	const size_t orgSize = (*mainContent).ticketList.size();
 
-	(*mainContent).ticketList.erase(
-		std::remove_if((*mainContent).ticketList.begin(), (*mainContent).ticketList.end(),
-			[id](const Ticket& t) { return t.thisID == id; }),
-		(*mainContent).ticketList.end());
+	try {
+		int id = std::stoi(getToken(currentCmd));
+		const size_t orgSize = mainContent->ticketList.size();
 
+		mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->thisID == id; });
 
-	if ((*mainContent).ticketList.size() == orgSize)
-		printError("Couldn't remove ticket.");
-	else
-		(*parentView).clearPanelContent();
+		if (mainContent->ticketList.size() == orgSize)
+			printError("Couldn't remove ticket.");
+		else
+			parentView->clearPanelContent();
+	}
+	catch (...) {
+		printError("Invalid data. Use 'remove Ticket [id].");
+		return;
+	}
 }
+
+
+void CommandHandler::delAirports(std::shared_ptr<City> c) {
+	for (auto i = mainContent->airportList.begin(); i != mainContent->airportList.end();) {
+		if ((*i)->pCity == c.get()) {
+			delConns(*i);
+			mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport == (*i).get(); });
+			mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport == (*i).get(); });
+			i = mainContent->airportList.erase(i);
+		}
+		else
+			i++;
+	}
+}
+
+void CommandHandler::delConns(std::shared_ptr<Airport> a) {
+	
+	for (auto i = mainContent->connectionList.begin(); i != mainContent->connectionList.end(); ) {
+		if ((*i)->pOrigin == a.get() || (*i)->pDestination == a.get()) {
+			mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->connectionCode == (*i)->connectionCode; });
+			i = mainContent->connectionList.erase(i);
+		}
+		else
+			i++;
+	}
+}
+
+
