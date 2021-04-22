@@ -233,7 +233,7 @@ void Content::printTickets() {
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
 		std::cout << std::setw(4) << std::left << (*x)->thisID;
-		std::cout << std::setw(15) << std::left << (*x)->connectionCode;
+		std::cout << std::setw(15) << std::left << (*x)->pConnection->connectionCode;
 		std::cout << std::setw(15) << std::left << (*x)->numOfPassengers;
 		std::cout << std::setw(15) << std::left << (*x)->price;
 	}

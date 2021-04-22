@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-class Airport;
 class Connection;
 
 class Ticket {
@@ -11,9 +10,7 @@ public:
 	static int id;
 	int thisID;
 
-	class Airport* pOrigin;
-	class Airport* pDestination;
-	std::string connectionCode;
+	class Connection* pConnection;
 	int numOfPassengers;
 	int price;
 	

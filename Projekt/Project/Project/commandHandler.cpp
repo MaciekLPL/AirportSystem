@@ -356,7 +356,7 @@ void CommandHandler::removeConnection() {
 	auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
 		[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
 
-	mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->connectionCode == (*connection)->connectionCode; });
+	mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection->connectionCode == (*connection)->connectionCode; });
 	mainContent->connectionList.erase(connection);
 
 	if (mainContent->staffList.size() == orgSize)
@@ -403,7 +403,7 @@ void CommandHandler::delConns(std::shared_ptr<Airport> a) {
 	
 	for (auto i = mainContent->connectionList.begin(); i != mainContent->connectionList.end(); ) {
 		if ((*i)->pOrigin == a.get() || (*i)->pDestination == a.get()) {
-			mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->connectionCode == (*i)->connectionCode; });
+			mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection->connectionCode == (*i)->connectionCode; });
 			i = mainContent->connectionList.erase(i);
 		}
 		else
