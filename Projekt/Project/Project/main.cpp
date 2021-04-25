@@ -37,6 +37,7 @@ int main() {
 	}
 
 	mainContent.refreshContent();
+	cmdHandler.printInformation("Press '/' to enter command line, 'TAB' to change view, 'ESC' to quit.");
 
 	while (1) {
 		

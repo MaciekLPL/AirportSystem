@@ -43,11 +43,11 @@ std::string CommandHandler::getToken(std::string& s) {
 }
 
 
-void CommandHandler::printError(std::string errorString) {
+void CommandHandler::printInformation(std::string info) {
 
 	parentView->clearPanelContent();
 	parentView->gotoxy(parentView->startX + 2, parentView->startY + 3);
-	std::cout << errorString;
+	std::cout << info;
 }
 
 
@@ -61,7 +61,7 @@ void CommandHandler::splitCommand() {
 	else if (token == "REMOVE")
 		removeCommand();
 	else
-		printError("Invalid command. Use 'add' or 'remove'.");
+		printInformation("Invalid command. Use 'add' or 'remove'.");
 }
 
 
@@ -83,7 +83,7 @@ void CommandHandler::addCommand() {
 	else if (type == "TICKET")
 		addTicket();
 	else
-		printError("Invalid data type.");
+		printInformation("Invalid data type.");
 }
 
 
@@ -105,7 +105,7 @@ void CommandHandler::removeCommand() {
 	else if (type == "TICKET")
 		removeTicket();
 	else
-		printError("Invalid data type.");
+		printInformation("Invalid data type.");
 }
 
 
@@ -123,7 +123,7 @@ void CommandHandler::addCity() {
 		parentView->clearPanelContent();
 	}
 	else
-		printError("Invalid data. Use 'add City [CityName] [PostalCode]'.");
+		printInformation("Invalid data. Use 'add City [CityName] [PostalCode]'.");
 }
 
 
@@ -137,7 +137,7 @@ void CommandHandler::addAirport() {
 		[&](std::shared_ptr<City> c) { return c->postalCode == postalCode; });
 
 	if (parentCity == mainContent->cityList.end()) {
-		printError("Invalid data. Couldn't find given city.");
+		printInformation("Invalid data. Couldn't find given city.");
 		return;
 	}
 
@@ -150,7 +150,7 @@ void CommandHandler::addAirport() {
 		parentView->clearPanelContent();
 	}
 	else
-		printError("Invalid data. Use 'add Airport [ExistingCity] [AirportCode] [AirportName]'.");
+		printInformation("Invalid data. Use 'add Airport [ExistingCity] [AirportCode] [AirportName]'.");
 }
 
 
@@ -164,7 +164,7 @@ void CommandHandler::addAirplane() {
 		[&](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
 
 	if (parentAirport == mainContent->airportList.end()) {
-		printError("Invalid data. Couldn't find given airport.");
+		printInformation("Invalid data. Couldn't find given airport.");
 		return;
 	}
 
@@ -177,7 +177,7 @@ void CommandHandler::addAirplane() {
 		parentView->clearPanelContent();
 	}
 	else
-		printError("Invalid data. Use 'add Airplane [ExistingAirport] [Registration] [Type]'.");
+		printInformation("Invalid data. Use 'add Airplane [ExistingAirport] [Registration] [Type]'.");
 }
 
 
@@ -194,7 +194,7 @@ void CommandHandler::addStaff() {
 			[airportCode](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
 
 		if (parentAirport == mainContent->airportList.end()) {
-			printError("Invalid data. Couldn't find given airport.");
+			printInformation("Invalid data. Couldn't find given airport.");
 			return;
 		}
 
@@ -211,7 +211,7 @@ void CommandHandler::addStaff() {
 			throw;
 	}
 	catch (...) {
-		printError("Invalid data. Use 'add Staff [ExistingAirport] [Name] [Surname] [Position] [Age]'.");
+		printInformation("Invalid data. Use 'add Staff [ExistingAirport] [Name] [Surname] [Position] [Age]'.");
 		return;
 	}
 }
@@ -230,7 +230,7 @@ void CommandHandler::addConnection() {
 		[&](std::shared_ptr<Airport> a) { return a->airportCode == destAirportCode; });
 
 	if (orgAirport == mainContent->airportList.end() || destAirport == mainContent->airportList.end()) {
-		printError("Invalid data. Couldn't find given airports.");
+		printInformation("Invalid data. Couldn't find given airports.");
 		return;
 	}
 
@@ -242,7 +242,7 @@ void CommandHandler::addConnection() {
 		parentView->clearPanelContent();
 	}
 	else
-		printError("Invalid data. Use 'add Connection [From (Airport Code)] [To (Airport Code)] [Connection Code]'.");
+		printInformation("Invalid data. Use 'add Connection [From (Airport Code)] [To (Airport Code)] [Connection Code]'.");
 }
 
 
@@ -257,7 +257,7 @@ void CommandHandler::addTicket() {
 			[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
 
 		if (connection == mainContent->connectionList.end()) {
-			printError("Invalid data. Couldn't find given connection.");
+			printInformation("Invalid data. Couldn't find given connection.");
 			return;
 		}
 
@@ -271,7 +271,7 @@ void CommandHandler::addTicket() {
 			throw;
 	}
 	catch (...) {
-		printError("Invalid data. Use 'add Ticket [Connection code] [No. of passengers] [Price]'.");
+		printInformation("Invalid data. Use 'add Ticket [Connection code] [No. of passengers] [Price]'.");
 		return;
 	}
 }
@@ -289,7 +289,7 @@ void CommandHandler::removeCity() {
 	mainContent->cityList.erase(city);
 
 	if (mainContent->cityList.size() == orgSize)
-		printError("Couldn't remove city.");
+		printInformation("Couldn't remove city.");
 	else
 		parentView->clearPanelContent();
 }
@@ -309,7 +309,7 @@ void CommandHandler::removeAirport() {
 	mainContent->airportList.erase(airport);
 
 	if (mainContent->airportList.size() == orgSize)
-		printError("Couldn't remove airport.");
+		printInformation("Couldn't remove airport.");
 	else
 		parentView->clearPanelContent();
 }
@@ -323,7 +323,7 @@ void CommandHandler::removeAirplane() {
 	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->registration == registration; });
 
 	if (mainContent->airplaneList.size() == orgSize)
-		printError("Couldn't remove airplane.");
+		printInformation("Couldn't remove airplane.");
 	else
 		parentView->clearPanelContent();
 }
@@ -338,12 +338,12 @@ void CommandHandler::removeStaff() {
 		mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->thisID == id; });
 
 		if (mainContent->staffList.size() == orgSize)
-			printError("Couldn't remove staff.");
+			printInformation("Couldn't remove staff.");
 		else
 			parentView->clearPanelContent();
 	}
 	catch (...) {
-		printError("Invalid data. Use 'remove Staff [id].");
+		printInformation("Invalid data. Use 'remove Staff [id].");
 		return;
 	}
 }
@@ -360,7 +360,7 @@ void CommandHandler::removeConnection() {
 	mainContent->connectionList.erase(connection);
 
 	if (mainContent->staffList.size() == orgSize)
-		printError("Couldn't remove connection.");
+		printInformation("Couldn't remove connection.");
 	else
 		parentView->clearPanelContent();
 }
@@ -375,12 +375,12 @@ void CommandHandler::removeTicket() {
 		mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->thisID == id; });
 
 		if (mainContent->ticketList.size() == orgSize)
-			printError("Couldn't remove ticket.");
+			printInformation("Couldn't remove ticket.");
 		else
 			parentView->clearPanelContent();
 	}
 	catch (...) {
-		printError("Invalid data. Use 'remove Ticket [id].");
+		printInformation("Invalid data. Use 'remove Ticket [id].");
 		return;
 	}
 }

@@ -18,6 +18,7 @@ public:
 	void getCommand();
 	void splitCommand();
 	std::string currentCmd;
+	void printInformation(std::string info);
 
 private:
 	View* parentView;
@@ -31,7 +32,6 @@ private:
 	std::regex connCodePattern = std::regex("[A-Z]{3}[0-9]{5}");
 
 	std::string getToken(std::string& s);
-	void printError(std::string errorString);
 	void addCommand();
 	void removeCommand();
 	
@@ -40,25 +40,21 @@ private:
 
 	void addAirport();
 	void removeAirport();
-	void delAirports(std::shared_ptr<City> c);
 
 	void addAirplane();
 	void removeAirplane();
-	void delAirplanes(std::shared_ptr<Airport> a);
 
 	void addStaff();
 	void removeStaff();
-	void delStaff(std::shared_ptr<Airport> a);
 
 	void addConnection();
 	void removeConnection();
-	void delConns(std::shared_ptr<Airport> a);
 
 	void addTicket();
 	void removeTicket();
-	void delTickets(std::shared_ptr<Connection> c);
 
-	void refreshLists();
+	void delAirports(std::shared_ptr<City> c);
+	void delConns(std::shared_ptr<Airport> a);
 
 };
 
