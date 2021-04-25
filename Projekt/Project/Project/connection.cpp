@@ -4,7 +4,7 @@
 
 Connection::Connection(std::shared_ptr<Airport> destination, std::string code) {
 
-	pDestination = destination.get();
+	pDestination = destination;
 	connectionCode = code;
 }
 

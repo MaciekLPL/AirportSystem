@@ -3,7 +3,7 @@
 
 Ticket::Ticket(std::shared_ptr<Connection> connection, int _numOfPassengers, int _price) : thisID(id++) {
 	
-	this->pConnection = connection.get();
+	this->pConnection = connection;
 	this->numOfPassengers = _numOfPassengers;
 	this->price = _price;
 }

@@ -7,7 +7,7 @@ class Airport;
 
 class Airplane {
 public:
-	class Airport* pAirport;
+	std::shared_ptr<Airport> pAirport;
 	std::string registration;
 	std::string type;
 	Airplane(std::string _registration, std::string _type);

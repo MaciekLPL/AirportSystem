@@ -10,7 +10,7 @@ public:
 	static int id;
 	int thisID;
 
-	class Connection* pConnection;
+	std::shared_ptr<Connection> pConnection;
 	int numOfPassengers;
 	int price;
 	

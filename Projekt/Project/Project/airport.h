@@ -9,10 +9,10 @@ class Connection;
 class Staff;
 class Airplane;
 
-class Airport {
+class Airport : public std::enable_shared_from_this <Airport> {
 public:
 
-	class City* pCity;
+	std::shared_ptr<City> pCity;
 	std::string airportCode;
 	std::string airportName;
 

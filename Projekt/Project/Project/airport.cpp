@@ -29,16 +29,16 @@ Airport::~Airport() {
 }
 
 void Airport::addConnection(std::shared_ptr<Connection> pConnection) {
-	pConnection->pOrigin = this;
+	pConnection->pOrigin = shared_from_this();
 	this->connectionList.push_back(pConnection);
 }
 
 void Airport::addStaff(std::shared_ptr<Staff> pStaff) {
-	pStaff->pAirport = this;
+	pStaff->pAirport = shared_from_this();
 	this->staffList.push_back(pStaff);
 }
 
 void Airport::addAirplane(std::shared_ptr<Airplane> pAirplane) {
-	pAirplane->pAirport = this;
+	pAirplane->pAirport = shared_from_this();
 	this->airplaneList.push_back(pAirplane);
 }

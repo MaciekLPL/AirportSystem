@@ -18,6 +18,7 @@ City::~City() {
 }
 
 void City::addAirport(std::shared_ptr<Airport> airport) {
-	airport->pCity = this;
+	auto p = shared_from_this();
+	airport->pCity = p;
 	this->airportList.push_back(airport);
 }

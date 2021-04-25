@@ -3,9 +3,11 @@
 
 #include <iostream>
 
+class Airport;
+
 class Staff {
 public:
-	class Airport* pAirport;
+	std::shared_ptr<Airport> pAirport;
 	static int id;
 	int thisID;
 	std::string name;

@@ -6,9 +6,8 @@
 
 class Airport;
 
-class City {
+class City : public std::enable_shared_from_this <City> {
 public:
-
 	City(std::string name, std::string postal);
 	~City();
 	void addAirport(std::shared_ptr<Airport> airport);

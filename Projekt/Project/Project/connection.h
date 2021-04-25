@@ -11,8 +11,8 @@ class Connection {
 public:
 
 	
-	class Airport* pOrigin;
-	class Airport* pDestination;
+	std::shared_ptr<Airport> pOrigin;
+	std::shared_ptr<Airport> pDestination;
 	std::string connectionCode;
 
 	Connection(std::shared_ptr<Airport> destination, std::string code);
