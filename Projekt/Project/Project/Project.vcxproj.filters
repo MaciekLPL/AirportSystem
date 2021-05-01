@@ -57,6 +57,9 @@
     <ClCompile Include="fileHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mem-leak-detect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="connection.h">
@@ -78,6 +81,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="fileHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem-leak-config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mem-leak-detect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

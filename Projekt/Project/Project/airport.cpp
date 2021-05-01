@@ -11,7 +11,7 @@ Airport::Airport(std::string code, std::string name) {
 }
 
 Airport::~Airport() {
-	/*while (!connectionList.empty()) {
+	while (!connectionList.empty()) {
 		connectionList.pop_front();
 	}
 
@@ -21,24 +21,23 @@ Airport::~Airport() {
 
 	while (!airplaneList.empty()) {
 		airplaneList.pop_front();
-	}*/
+	}
 	connectionList.clear();
 	staffList.clear();
 	airplaneList.clear();
-
 }
 
 void Airport::addConnection(std::shared_ptr<Connection> pConnection) {
-	pConnection->pOrigin = shared_from_this();
+	pConnection->pOrigin = weak_from_this();
 	this->connectionList.push_back(pConnection);
 }
 
 void Airport::addStaff(std::shared_ptr<Staff> pStaff) {
-	pStaff->pAirport = shared_from_this();
+	pStaff->pAirport = weak_from_this();
 	this->staffList.push_back(pStaff);
 }
 
 void Airport::addAirplane(std::shared_ptr<Airplane> pAirplane) {
-	pAirplane->pAirport = shared_from_this();
+	pAirplane->pAirport = weak_from_this();
 	this->airplaneList.push_back(pAirplane);
 }

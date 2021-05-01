@@ -11,14 +11,14 @@ City::City(std::string name, std::string postal) {
 }
 
 City::~City() {
-	/*while (!airportList.empty()) {
+	while (!airportList.empty()) {
 		airportList.pop_front();
-	}*/
+	}
 	airportList.clear();
 }
 
 void City::addAirport(std::shared_ptr<Airport> airport) {
-	auto p = shared_from_this();
+	auto p = weak_from_this();
 	airport->pCity = p;
 	this->airportList.push_back(airport);
 }

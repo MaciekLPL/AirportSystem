@@ -23,7 +23,7 @@ public:
 	void scrollDown();
 	void scrollUp();
 	void refreshContent();
-
+	~Content();
 	std::list <std::shared_ptr<City>> cityList;
 	std::list <std::shared_ptr<Airport>> airportList;
 	std::list <std::shared_ptr<Airplane>> airplaneList;

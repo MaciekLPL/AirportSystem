@@ -12,6 +12,33 @@ Content::Content(View* _parentView) {
 	this->parentView = _parentView;
 }
 
+Content::~Content() {
+	//while (!cityList.empty()) {
+	//	cityList.pop_front();
+	//}
+	//cityList.clear();
+	//while (!airportList.empty()) {
+	//	airportList.pop_front();
+	//}
+	//airportList.clear();
+	//while (!staffList.empty()) {
+	//	staffList.pop_front();
+	//}
+	//staffList.clear();
+	//while (!airplaneList.empty()) {
+	//	airplaneList.pop_front();
+	//}
+	//airplaneList.clear();
+	//while (!connectionList.empty()) {
+	//	connectionList.pop_front();
+	//}
+	//connectionList.clear();
+	//while (!ticketList.empty()) {
+	//	ticketList.pop_front();
+	//}
+	//ticketList.clear();
+}
+
 
 void Content::changeCurrentContent() {
 	parentView->clearPanelContent();
@@ -141,7 +168,7 @@ void Content::printAirports() {
 		parentView->gotoxy(parentView->startX + 2, i++);
 		std::cout << std::setw(15) << std::left << (*x)->airportName;
 		std::cout << std::setw(15) << std::left << (*x)->airportCode;
-		std::cout << std::setw(15) << std::left << (*x)->pCity->cityName;
+		std::cout << std::setw(15) << std::left << (*x)->pCity.lock()->cityName;
 	}
 	parentView->updateTitle("Airports (2/6)");
 }
@@ -166,7 +193,7 @@ void Content::printStaff() {
 		std::cout << std::setw(15) << std::left << (*x)->surname;
 		std::cout << std::setw(15) << std::left << (*x)->position;
 		std::cout << std::setw(4) << std::left << (*x)->age;
-		std::cout << std::setw(15) << std::left << (*x)->pAirport->airportName;
+		std::cout << std::setw(15) << std::left << (*x)->pAirport.lock()->airportName;
 	}
 	parentView->updateTitle("Staff (3/6)");
 }
@@ -186,7 +213,7 @@ void Content::printAirplanes() {
 		if (i >= 22)
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*x)->pAirport->airportName;
+		std::cout << std::setw(15) << std::left << (*x)->pAirport.lock()->airportName;
 		std::cout << std::setw(15) << std::left << (*x)->registration;
 		std::cout << std::setw(15) << std::left << (*x)->type;
 	}
@@ -208,10 +235,10 @@ void Content::printConnections() {
 		if (i >= 22)
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
-		std::cout << std::setw(15) << std::left << (*x)->pOrigin->airportName;
-		std::cout << std::setw(10) << std::left << (*x)->pOrigin->airportCode;
-		std::cout << std::setw(15) << std::left << (*x)->pDestination->airportName;
-		std::cout << std::setw(10) << std::left << (*x)->pDestination->airportCode;
+		std::cout << std::setw(15) << std::left << (*x)->pOrigin.lock()->airportName;
+		std::cout << std::setw(10) << std::left << (*x)->pOrigin.lock()->airportCode;
+		std::cout << std::setw(15) << std::left << (*x)->pDestination.lock()->airportName;
+		std::cout << std::setw(10) << std::left << (*x)->pDestination.lock()->airportCode;
 		std::cout << std::setw(15) << std::left << (*x)->connectionCode;
 	}
 	parentView->updateTitle("Connections (5/6)");
@@ -233,7 +260,7 @@ void Content::printTickets() {
 			break;
 		parentView->gotoxy(parentView->startX + 2, i++);
 		std::cout << std::setw(4) << std::left << (*x)->thisID;
-		std::cout << std::setw(15) << std::left << (*x)->pConnection->connectionCode;
+		std::cout << std::setw(15) << std::left << (*x)->pConnection.lock()->connectionCode;
 		std::cout << std::setw(15) << std::left << (*x)->numOfPassengers;
 		std::cout << std::setw(15) << std::left << (*x)->price;
 	}

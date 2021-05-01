@@ -304,8 +304,8 @@ void CommandHandler::removeAirport() {
 		[&](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
 
 	delConns(*airport);
-	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport == (*airport); });
-	mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport == (*airport); });
+	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport.lock() == (*airport); });
+	mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport.lock() == (*airport); });
 	mainContent->airportList.erase(airport);
 
 	if (mainContent->airportList.size() == orgSize)
@@ -356,7 +356,7 @@ void CommandHandler::removeConnection() {
 	auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
 		[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
 
-	mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection->connectionCode == (*connection)->connectionCode; });
+	mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection.lock()->connectionCode == (*connection)->connectionCode; });
 	mainContent->connectionList.erase(connection);
 
 	if (mainContent->staffList.size() == orgSize)
@@ -388,10 +388,10 @@ void CommandHandler::removeTicket() {
 
 void CommandHandler::delAirports(std::shared_ptr<City> c) {
 	for (auto i = mainContent->airportList.begin(); i != mainContent->airportList.end();) {
-		if ((*i)->pCity == c) {
+		if ((*i)->pCity.lock() == c) {
 			delConns(*i);
-			mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport == (*i); });
-			mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport == (*i); });
+			mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->pAirport.lock() == (*i); });
+			mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->pAirport.lock() == (*i); });
 			i = mainContent->airportList.erase(i);
 		}
 		else
@@ -402,8 +402,8 @@ void CommandHandler::delAirports(std::shared_ptr<City> c) {
 void CommandHandler::delConns(std::shared_ptr<Airport> a) {
 	
 	for (auto i = mainContent->connectionList.begin(); i != mainContent->connectionList.end(); ) {
-		if ((*i)->pOrigin == a || (*i)->pDestination == a) {
-			mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection->connectionCode == (*i)->connectionCode; });
+		if ((*i)->pOrigin.lock() == a || (*i)->pDestination.lock() == a) {
+			mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->pConnection.lock()->connectionCode == (*i)->connectionCode; });
 			i = mainContent->connectionList.erase(i);
 		}
 		else

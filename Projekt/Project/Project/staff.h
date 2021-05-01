@@ -7,7 +7,7 @@ class Airport;
 
 class Staff {
 public:
-	std::shared_ptr<Airport> pAirport;
+	std::weak_ptr<Airport> pAirport;
 	static int id;
 	int thisID;
 	std::string name;
@@ -16,8 +16,6 @@ public:
 	int age;
 
 	Staff(std::string name, std::string surname, std::string position, int age);
-
-private:
 
 };
 

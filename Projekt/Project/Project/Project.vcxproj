@@ -150,6 +150,7 @@
     <ClCompile Include="fileHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="airport.h" />
+    <ClCompile Include="mem-leak-detect.cpp" />
     <ClCompile Include="staff.cpp" />
     <ClCompile Include="ticket.cpp" />
     <ClCompile Include="view.cpp" />
@@ -159,6 +160,8 @@
     <ClInclude Include="connection.h" />
     <ClInclude Include="commandHandler.h" />
     <ClInclude Include="fileHandler.h" />
+    <ClInclude Include="mem-leak-config.h" />
+    <ClInclude Include="mem-leak-detect.h" />
     <ClInclude Include="staff.h" />
     <ClInclude Include="ticket.h" />
     <ClInclude Include="view.h" />

@@ -1,6 +1,9 @@
 #include <iostream>
 #include <conio.h>
 #include <string>
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
 #include "commandHandler.h"
 #include "fileHandler.h"
 #include "content.h"
@@ -20,11 +23,11 @@ int main() {
 
 	View panelMain(22, 1, 97, 22);
 	View panelBottom(11, 23, 109, 27, "Command line");
-	
+
 	Content mainContent(&panelMain);
 
 	CommandHandler cmdHandler(&panelBottom, &mainContent);
-	
+
 	panelMain.ShowConsoleCursor(0);
 
 	try {
@@ -40,9 +43,9 @@ int main() {
 	cmdHandler.printInformation("Press '/' to enter command line, 'TAB' to change view, 'ESC' to quit.");
 
 	while (1) {
-		
+
 		int c = _getch();
-		
+
 		if (c == 0xE0) {
 			c = _getch();
 			switch (c) {
@@ -50,7 +53,7 @@ int main() {
 			case 0x48:		//góra
 				mainContent.scrollUp();
 				break;
-			
+
 			case 0x50:		//dó³
 				mainContent.scrollDown();
 				break;
@@ -76,5 +79,4 @@ int main() {
 	}
 
 	system("cls");	//koñcówka while
-	return 0;
 }

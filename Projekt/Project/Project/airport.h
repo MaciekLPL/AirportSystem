@@ -12,7 +12,7 @@ class Airplane;
 class Airport : public std::enable_shared_from_this <Airport> {
 public:
 
-	std::shared_ptr<City> pCity;
+	std::weak_ptr<City> pCity;
 	std::string airportCode;
 	std::string airportName;
 

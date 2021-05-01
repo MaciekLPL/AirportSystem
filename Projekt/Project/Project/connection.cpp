@@ -10,9 +10,9 @@ Connection::Connection(std::shared_ptr<Airport> destination, std::string code) {
 
 Connection::~Connection() {
 
-	/*while (!ticketList.empty()) {
+	while (!ticketList.empty()) {
 		ticketList.pop_front();
-	}*/
+	}
 	ticketList.clear();
 }
 

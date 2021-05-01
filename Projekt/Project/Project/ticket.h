@@ -10,7 +10,7 @@ public:
 	static int id;
 	int thisID;
 
-	std::shared_ptr<Connection> pConnection;
+	std::weak_ptr<Connection> pConnection;
 	int numOfPassengers;
 	int price;
 	
