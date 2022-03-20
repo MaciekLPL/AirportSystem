@@ -31,7 +31,7 @@ void CommandHandler::getCommand() {
 }
 
 
-std::string CommandHandler::getToken(std::string& s) {
+std::string CommandHandler::getToken() {
 
 	size_t pos = 0;
 	std::string token;
@@ -53,7 +53,7 @@ void CommandHandler::printInformation(std::string info) {
 
 void CommandHandler::splitCommand() {
 	
-	std::string token = getToken(currentCmd);
+	std::string token = getToken();
 	std::transform(token.begin(), token.end(), token.begin(), ::toupper);
 
 	if (token == "ADD")
@@ -67,7 +67,7 @@ void CommandHandler::splitCommand() {
 
 void CommandHandler::addCommand() {
 	
-	std::string type = getToken(currentCmd);
+	std::string type = getToken();
 	std::transform(type.begin(), type.end(), type.begin(), ::toupper);
 
 	if (type == "CITY")
@@ -89,7 +89,7 @@ void CommandHandler::addCommand() {
 
 void CommandHandler::removeCommand() {
 
-	std::string type = getToken(currentCmd);
+	std::string type = getToken();
 	std::transform(type.begin(), type.end(), type.begin(), ::toupper);
 
 	if (type == "CITY")
@@ -111,8 +111,8 @@ void CommandHandler::removeCommand() {
 
 void CommandHandler::addCity() {
 
-	std::string cityName = getToken(currentCmd);
-	std::string postalCode = getToken(currentCmd);
+	std::string cityName = getToken();
+	std::string postalCode = getToken();
 
 
 	if ((std::regex_match(cityName, namePattern)) && 
@@ -129,9 +129,9 @@ void CommandHandler::addCity() {
 
 void CommandHandler::addAirport() {
 
-	std::string postalCode = getToken(currentCmd);
-	std::string airportCode = getToken(currentCmd);
-	std::string airportName = getToken(currentCmd);
+	std::string postalCode = getToken();
+	std::string airportCode = getToken();
+	std::string airportName = getToken();
 
 	auto parentCity = std::find_if(std::begin(mainContent->cityList), std::end(mainContent->cityList),
 		[&](std::shared_ptr<City> c) { return c->postalCode == postalCode; });
@@ -156,9 +156,9 @@ void CommandHandler::addAirport() {
 
 void CommandHandler::addAirplane() {
 
-	std::string airportCode = getToken(currentCmd);
-	std::string registation = getToken(currentCmd);
-	std::string type = getToken(currentCmd);
+	std::string airportCode = getToken();
+	std::string registation = getToken();
+	std::string type = getToken();
 
 	auto parentAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
 		[&](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
@@ -184,11 +184,11 @@ void CommandHandler::addAirplane() {
 void CommandHandler::addStaff() {
 
 	try {
-		std::string airportCode = getToken(currentCmd);
-		std::string name = getToken(currentCmd);
-		std::string surname = getToken(currentCmd);
-		std::string position = getToken(currentCmd);
-		int age = std::stoi(getToken(currentCmd));
+		std::string airportCode = getToken();
+		std::string name = getToken();
+		std::string surname = getToken();
+		std::string position = getToken();
+		int age = std::stoi(getToken());
 
 		auto parentAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
 			[airportCode](std::shared_ptr<Airport> a) { return a->airportCode == airportCode; });
@@ -218,9 +218,9 @@ void CommandHandler::addStaff() {
 
 
 void CommandHandler::addConnection() {
-	std::string orgAirportCode = getToken(currentCmd);
-	std::string destAirportCode = getToken(currentCmd);
-	std::string connCode = getToken(currentCmd);
+	std::string orgAirportCode = getToken();
+	std::string destAirportCode = getToken();
+	std::string connCode = getToken();
 
 
 	auto orgAirport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
@@ -249,9 +249,9 @@ void CommandHandler::addConnection() {
 void CommandHandler::addTicket() {
 	
 	try {
-		std::string connCode = getToken(currentCmd);
-		int numOfPassenger = stoi(getToken(currentCmd));
-		int price = stoi(getToken(currentCmd));
+		std::string connCode = getToken();
+		int numOfPassenger = stoi(getToken());
+		int price = stoi(getToken());
 
 		auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
 			[&](std::shared_ptr<Connection> c) { return c->connectionCode == connCode; });
@@ -279,7 +279,7 @@ void CommandHandler::addTicket() {
 
 void CommandHandler::removeCity() {
 
-	std::string postalCode = getToken(currentCmd);
+	std::string postalCode = getToken();
 	const size_t orgSize = mainContent->cityList.size();
 
 	auto city = std::find_if(std::begin(mainContent->cityList), std::end(mainContent->cityList),
@@ -297,7 +297,7 @@ void CommandHandler::removeCity() {
 
 void CommandHandler::removeAirport() {
 
-	std::string airportCode = getToken(currentCmd);
+	std::string airportCode = getToken();
 	const size_t orgSize = mainContent->airportList.size();
 
 	auto airport = std::find_if(std::begin(mainContent->airportList), std::end(mainContent->airportList),
@@ -317,7 +317,7 @@ void CommandHandler::removeAirport() {
 
 void CommandHandler::removeAirplane() {
 	
-	std::string registration = getToken(currentCmd);
+	std::string registration = getToken();
 	const size_t orgSize = mainContent->airplaneList.size();
 
 	mainContent->airplaneList.remove_if([&](std::shared_ptr<Airplane> a) { return a->registration == registration; });
@@ -332,7 +332,7 @@ void CommandHandler::removeAirplane() {
 void CommandHandler::removeStaff() {
 
 	try {
-		int id = std::stoi(getToken(currentCmd));
+		int id = std::stoi(getToken());
 		const size_t orgSize = mainContent->staffList.size();
 
 		mainContent->staffList.remove_if([&](std::shared_ptr<Staff> s) { return s->thisID == id; });
@@ -350,7 +350,7 @@ void CommandHandler::removeStaff() {
 
 
 void CommandHandler::removeConnection() {
-	std::string connCode = getToken(currentCmd);
+	std::string connCode = getToken();
 	const size_t orgSize = mainContent->connectionList.size();
 
 	auto connection = std::find_if(std::begin(mainContent->connectionList), std::end(mainContent->connectionList),
@@ -369,7 +369,7 @@ void CommandHandler::removeConnection() {
 void CommandHandler::removeTicket() {
 
 	try {
-		int id = std::stoi(getToken(currentCmd));
+		int id = std::stoi(getToken());
 		const size_t orgSize = mainContent->ticketList.size();
 
 		mainContent->ticketList.remove_if([&](std::shared_ptr<Ticket> t) { return t->thisID == id; });
